@@ -43,18 +43,18 @@ services:
 
   react-app:
     build:
-      context: ./frontend  # Path to your React app
+      context: ./frontend
     container_name: react_app
     ports:
-      - "80:80"
+      - "8080:80"  # Changed from "80:80" to "8080:80"
     networks:
       - app_network
     depends_on:
       - nestjs-app
     volumes:
-      - ./frontend:/usr/share/nginx/html  # Serve React app using Nginx
-    command: ["nginx", "-g", "daemon off;"]  # This will run Nginx to serve the app
-
+      - ./frontend:/usr/share/nginx/html
+    command: ["nginx", "-g", "daemon off;"]
+    
   nginx:
     image: nginx:latest
     container_name: nginx
