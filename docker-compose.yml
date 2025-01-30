@@ -19,7 +19,7 @@ services:
 
   nestjs-app:
     build:
-      context: ./nestjs-app  # Path to your NestJS app
+      context: ./backend  # Path to your NestJS app
     container_name: nestjs_app
     ports:
       - "3000:3000"
@@ -34,16 +34,16 @@ services:
     networks:
       - app_network
     volumes:
-      - ./nestjs-app:/usr/src/app  # Mount NestJS app directory
-      - ./uploads:/usr/src/app/uploads
+      - ./backend:/usr/src/app  # Mount backend directory
+      - ./backend/uploads:/usr/src/app/uploads
     working_dir: /usr/src/app
     command: npm run start:dev
     env_file:
-      - ./nestjs-app/.env  # Reference the .env inside the NestJS app directory
+      - ./backend/.env  # Reference the .env inside the backend directory
 
   react-app:
     build:
-      context: ./react-app  # Path to your React app
+      context: ./frontend  # Path to your React app
     container_name: react_app
     ports:
       - "80:80"
@@ -52,7 +52,7 @@ services:
     depends_on:
       - nestjs-app
     volumes:
-      - ./react-app:/usr/share/nginx/html
+      - ./frontend:/usr/share/nginx/html
     command: ["nginx", "-g", "daemon off;"]
 
 volumes:
