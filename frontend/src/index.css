@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.backgroundowhite {
+   background-color:rgb(255 255 255 / 80%)
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+html {
+  scroll-behavior: smooth;
+
+}
+
+
+*:focus {
+  outline: none !important;
+}
+
+.background-drop---navbar{
+  background: rgba(255, 255, 255, 0.322);
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.102);
+  will-change: transform;
+  backdrop-filter: blur(8px);
+
+}
+
+.background-drop--bluebase{
+  background: rgba(255, 255, 255, 0.34);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: backdrop-filter 0.3s ease;
+  will-change: transform;
+}
+
+.background-drop--bluebase--likecard{
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: backdrop-filter 0.3s ease;
+  will-change: transform;
+}
+
+.maxcontentimportant{
+  max-width: none !important;
+}
+
+.exploreSipwePagination {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: unset !important;
+  background: rgba(165, 148, 249, 0.341);
+  backdrop-filter: blur(8px);
+  color: #FFF;
+}
+
+.footerswipcard{
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 16px;
+}
+
+
+.background-drop--whitebase {
+  background: rgba(255, 255, 255, 0.341);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  transition: backdrop-filter 0.3s ease;
+}
+
+.border-color--carts{
+  border: 1px #e5e5e5 solid;
+}
+
+.border-color--carts---modal{
+  border: 1px #f0edff solid;
+}
+
+.progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--accent);
+  bottom: 100px;
+}
+
+.parallax {
+  overflow: hidden;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax .scroller {
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.parallax span {
+  display: block;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.swiper-pagination-bullet-active{
+  background-color: #1FB6A8;
+}
+
+.borderRadius50{
+  border-radius: 50%;
+}
+
+.border-bottom-0{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+
+@keyframes moveRight {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.animated-background {
+  background-image: linear-gradient(135deg, #21b6a8 15%, transparent 15%, transparent 50%, #21b6a8 50%, #21b6a8 65%, transparent 65%);
+  background-size: 60px 60px; 
+}
+
+.addfirend-card-grandient {
+  background: linear-gradient(45deg,#30496B,#30B8D2);
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+    >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#000000"/>
+    <title>Mull Mull</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Signika+Negative:wght@300..700&display=swap" rel="stylesheet">
+  
+  <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mobile-body {
+        overflow: hidden;
+        height: 100vh;
+      }
+
+    </style>
+  </head>
+  <body class="mobile-body" id="thisbody">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+
+  <script src="https://unpkg.com/@telegram-apps/sdk@1.0.0/dist/index.iife.js"></script>
+  <script>
+      (function() {
+        var { retrieveLaunchParams, postEvent } = window.telegramApps.sdk;
+        var lp = retrieveLaunchParams();
+
+        // Some versions of Telegram don't need the classes above.
+        if (['macos', 'tdesktop', 'weba', 'web', 'webk'].includes(lp.platform)) {
+          return;
+        }
+        
+        // Expand the application.
+        postEvent('web_app_expand');
+        postEvent('web_app_request_safe_area');
+        postEvent('web_app_request_content_safe_area');
+        postEvent('web_app_request_fullscreen');
+
+      })();
+    </script>
+    <script src="/src/index.tsx" type="module"></script>
+
+  </body>
+</html>
