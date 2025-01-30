@@ -52,9 +52,23 @@ services:
     depends_on:
       - nestjs-app
     volumes:
-      - ./frontend:/usr/share/nginx/html
-    command: ["nginx", "-g", "daemon off;"]
+      - ./frontend:/usr/share/nginx/html  # Serve React app using Nginx
+    command: ["nginx", "-g", "daemon off;"]  # This will run Nginx to serve the app
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend:/usr/share/nginx/html  # Serve React app
+    depends_on:
+      - react-app
+      - nestjs-app
+    networks:
+      - app_network
+  command: ["nginx", "-g", "daemon off;"]  # Keep Nginx running
 volumes:
   postgres_data:
 
