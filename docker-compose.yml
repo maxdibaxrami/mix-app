@@ -68,7 +68,8 @@ services:
       - nestjs-app
     networks:
       - app_network
-  command: ["nginx", "-g", "daemon off;"]  # Keep Nginx running
+    command: ["nginx", "-g", "daemon off;"]  # Keep Nginx running
+
 volumes:
   postgres_data:
 
