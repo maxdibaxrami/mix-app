@@ -54,7 +54,7 @@ services:
     volumes:
       - ./frontend:/usr/share/nginx/html
     command: ["nginx", "-g", "daemon off;"]
-    
+
   nginx:
     image: nginx:latest
     container_name: nginx
