@@ -1,23 +1,23 @@
-FROM node:18
+FROM node:18-alpine
 
-# Set environment variables
-ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
-ENV NPM_CONFIG_FETCH_TIMEOUT=60000
-
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json from the backend folder
-COPY backend/package*.json ./  # Adjust the path to package.json
+COPY backend/package*.json ./
+RUN npm install --production # Install only production dependencies
 
-# Install dependencies
-RUN npm install --force
-
-# Copy the rest of the backend application code
 COPY backend/ .
 
-# Expose the necessary port
-EXPOSE 5000
+RUN npm run build
 
-# Command to start the backend app
-CMD ["npm", "start"]
+# Smaller final image (multi-stage build)
+FROM node:18-alpine AS production
+
+WORKDIR /app
+
+COPY --from=0 /app/dist ./dist
+COPY backend/package*.json ./
+RUN npm install --production
+
+EXPOSE 3000
+
+CMD ["node", "dist/main.js"] # Use the built app
