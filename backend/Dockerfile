@@ -9,7 +9,8 @@ ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 # Install necessary dependencies
 RUN apt-get update -o Acquire::http::Timeout=60 && \
     apt-get install -y apt-transport-https ca-certificates && \
-    sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.edge.kernel.org/ubuntu/|' /etc/apt/sources.list && \
+    # Replace with a valid Debian/Ubuntu release (e.g., bullseye)
+    test -f /etc/apt/sources.list || echo "deb http://deb.debian.org/debian bullseye main contrib non-free" > /etc/apt/sources.list && \
     apt-get update -o Acquire::http::Timeout=60 && \
     apt-get install -y \
     libpango1.0-dev \
