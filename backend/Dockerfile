@@ -1,18 +1,6 @@
 FROM node:18
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-  pkg-config \
-  libcairo2-dev \
-  libjpeg-dev \
-  librsvg2-dev \
-  python3 \
-  make \
-  g++ \
-  libpango1.0-dev \
-  libgif-dev \
-  libpangocairo-1.0-0 \
-  libglib2.0-dev
 
 # Set the pkg-config path
 ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
