@@ -20,7 +20,7 @@ services:
   nestjs-app:
     build:
       context: ./backend
-      dockerfile: ./backend/Dockerfile  # Specify the Dockerfile explicitly
+      dockerfile: Dockerfile  # Specify the Dockerfile explicitly
     container_name: nestjs_app
     ports:
       - "3000:3000"
@@ -45,7 +45,7 @@ services:
   react-app:
     build:
       context: ./frontend
-      dockerfile: ./frontend/Dockerfile  # Specify the Dockerfile explicitly
+      dockerfile: Dockerfile  # Specify the Dockerfile explicitly
     container_name: react_app
     ports:
       - "80:80" # Use standard port 80
