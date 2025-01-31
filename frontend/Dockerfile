@@ -1,18 +1,14 @@
-# Stage 1: Build Stage (Node.js based on Ubuntu)
+# Dockerfile for React (Frontend)
+# Stage 1: Build Stage (Node.js based on Debian)
 FROM node:18 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Install required system dependencies for Node.js and building
-RUN apt-get update && apt-get install -y \
-  python3 \
-  build-essential
-
 # Copy package.json and package-lock.json (if using npm)
 COPY package.json package-lock.json ./
 
-# Install dependencies
+# Install Node.js dependencies
 RUN npm install --force
 
 # Copy the rest of the application files
@@ -21,7 +17,7 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-# Stage 2: Production Stage (Nginx based on Ubuntu)
+# Stage 2: Production Stage (Nginx to serve the built app)
 FROM nginx:stable
 
 # Copy the build artifacts from the build stage to the Nginx default directory
