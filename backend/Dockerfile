@@ -7,7 +7,9 @@ ENV NODE_ENV=production
 ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 
 # Install necessary system dependencies for canvas (including pkg-config, Cairo, Pango, etc.)
-RUN apt-get update && apt-get install -y \
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.edge.kernel.org/ubuntu/|' /etc/apt/sources.list && \
+    apt-get update -o Acquire::http::Timeout=60 && \
+    apt-get install -y \
     libpango1.0-dev \
     libjpeg-dev \
     libgif-dev \
@@ -16,8 +18,8 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     python3 \
     make \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
+    g++ && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /app
