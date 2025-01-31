@@ -1,8 +1,13 @@
-# Stage 1: Build Stage
-FROM node:18-alpine AS build
+# Stage 1: Build Stage (Node.js based on Ubuntu)
+FROM node:18 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
+
+# Install required system dependencies for Node.js and building
+RUN apt-get update && apt-get install -y \
+  python3 \
+  build-essential
 
 # Copy package.json and package-lock.json (if using npm)
 COPY package.json package-lock.json ./
@@ -16,11 +21,11 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-# Stage 2: Production Stage (Nginx to serve the built app)
-FROM nginx:alpine
+# Stage 2: Production Stage (Nginx based on Ubuntu)
+FROM nginx:stable
 
 # Copy the build artifacts from the build stage to the Nginx default directory
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose the default port for Nginx
 EXPOSE 80

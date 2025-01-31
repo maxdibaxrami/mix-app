@@ -1,14 +1,18 @@
 # Base image for the application
-FROM node:18-alpine AS base
+FROM node:18 AS base
 
 # Set working directory
 WORKDIR /usr/src/app
 
-# Change Alpine repository to an accessible mirror
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirror.math.princeton.edu/g' /etc/apk/repositories
-
-# Install Python, build tools, and dependencies for canvas
-RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
+# Install system dependencies (Python, build tools)
+RUN apt-get update && apt-get install -y \
+  python3 \
+  build-essential \
+  libc6-dev \
+  cairo-dev \
+  pango-dev \
+  pixman-dev \
+  pkg-config
 
 # Install NestJS CLI globally
 RUN npm install -g @nestjs/cli
