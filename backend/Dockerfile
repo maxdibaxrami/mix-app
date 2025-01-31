@@ -7,13 +7,13 @@ WORKDIR /app
 # Copy package.json and package-lock.json (if using npm)
 COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm install --force
+# Install dependencies with no cache for clean installation
+RUN npm install --no-cache --force
 
 # Copy the rest of the application files
 COPY . .
 
-# Build the React app
+# Build the React app for production
 RUN npm run build
 
 # Stage 2: Production Stage (Nginx based on Ubuntu)
