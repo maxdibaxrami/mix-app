@@ -5,14 +5,14 @@ FROM node:18 AS build
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if using npm)
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json (if using npm) from the frontend folder
+COPY frontend/package.json frontend/package-lock.json ./
 
 # Install Node.js dependencies
 RUN npm install --force
 
-# Copy the rest of the application files
-COPY . .
+# Copy the rest of the application files from the frontend folder
+COPY frontend/ .
 
 # Build the React app
 RUN npm run build

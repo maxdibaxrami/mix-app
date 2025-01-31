@@ -35,41 +35,41 @@ services:
       - app_network
     volumes:
       - ./backend:/usr/src/app  # Mount backend directory
-      - ./backend/uploads:/usr/src/app/uploads
+      - ./backend/uploads:/usr/src/app/uploads  # Mount uploads folder for persistent data
     working_dir: /usr/src/app
-    command: npm run start:dev
+    command: npm run start:dev  # Development mode (you can change it if needed)
     env_file:
       - ./backend/.env  # Reference the .env inside the backend directory
+
   react-app:
     build:
-      context: ./frontend
+      context: ./frontend  # Path to your frontend (React app)
     container_name: react_app
     ports:
-      - "8080:80"  # Changed from "80:80" to "8080:80"
+      - "8080:80"  # Nginx serves React on port 80, but mapped to 8080 on host
     networks:
       - app_network
     depends_on:
       - nestjs-app
     volumes:
-      - ./frontend:/usr/share/nginx/html
-    command: ["nginx", "-g", "daemon off;"]
+      - ./frontend:/usr/share/nginx/html  # Mount frontend code (for development)
+    command: ["nginx", "-g", "daemon off;"]  # Nginx to serve the app
 
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "80:80"  # Nginx mapped to 80 on host for production use
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Custom Nginx configuration
+      - ./frontend:/usr/share/nginx/html  # Serve React from Nginx
     depends_on:
       - react-app
       - nestjs-app
     networks:
       - app_network
     restart: always  # Ensures Nginx restarts on reboot
-    command: ["nginx", "-g", "daemon off;"]
-
+    command: ["nginx", "-g", "daemon off;"]  # Keep Nginx running in the foreground
 
 volumes:
   postgres_data:
