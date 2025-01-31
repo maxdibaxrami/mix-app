@@ -7,22 +7,6 @@ ENV NODE_ENV=production
 ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 
 # Install necessary dependencies
-RUN apt-get update -o Acquire::http::Timeout=60 && \
-    apt-get install -y apt-transport-https ca-certificates && \
-    # Replace with a valid Debian/Ubuntu release (e.g., bullseye)
-    test -f /etc/apt/sources.list || echo "deb http://deb.debian.org/debian bullseye main contrib non-free" > /etc/apt/sources.list && \
-    apt-get update -o Acquire::http::Timeout=60 && \
-    apt-get install -y \
-    libpango1.0-dev \
-    libjpeg-dev \
-    libgif-dev \
-    libgtk2.0-dev \
-    libcairo2-dev \
-    pkg-config \
-    python3 \
-    make \
-    g++ && \
-    rm -rf /var/lib/apt/lists/*
 
 # Install node-gyp globally
 RUN npm install -g node-gyp
