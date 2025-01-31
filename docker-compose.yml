@@ -16,6 +16,9 @@ services:
       - app_network
     env_file:
       - .env  # Use the root .env file for database variables
+    dns:
+      - 8.8.8.8  # Google's DNS
+      - 1.1.1.1  # Cloudflare's DNS
 
   nestjs-app:
     build:
@@ -40,6 +43,9 @@ services:
     command: npm run start:dev
     env_file:
       - ./backend/.env  # Reference the .env inside the backend directory
+    dns:
+      - 8.8.8.8  # Google's DNS
+      - 1.1.1.1  # Cloudflare's DNS
 
   react-app:
     build:
@@ -54,6 +60,9 @@ services:
     volumes:
       - ./frontend:/usr/share/nginx/html
     command: ["nginx", "-g", "daemon off;"]
+    dns:
+      - 8.8.8.8  # Google's DNS
+      - 1.1.1.1  # Cloudflare's DNS
 
   nginx:
     image: nginx:latest
@@ -70,6 +79,9 @@ services:
       - app_network
     restart: always  # Ensures Nginx restarts on reboot
     command: ["nginx", "-g", "daemon off;"]
+    dns:
+      - 8.8.8.8  # Google's DNS
+      - 1.1.1.1  # Cloudflare's DNS
 
 volumes:
   postgres_data:
