@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 
 # Install Python, build tools, and dependencies for canvas
 #RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
+RUN apt-get update && apt-get install -y python3 python3-dev build-essential
 
 # Install NestJS CLI globally
 RUN npm install -g @nestjs/cli
