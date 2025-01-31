@@ -1,13 +1,13 @@
-# Stage 1: Build Stage (Node.js based on Ubuntu)
+# Stage 1: Build Stage (Node.js based on Debian)
 FROM node:18 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Update apt sources to a different mirror (you can replace with a different mirror)
-RUN sed -i 's|http://deb.debian.org/debian|http://ftp.de.debian.org/debian|g' /etc/apt/sources.list
+# Check if the apt sources.list exists, and if not, create it
+RUN test -f /etc/apt/sources.list || echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list
 
-# Install required system dependencies for Node.js and building
+# Update apt sources and install required system dependencies for Node.js and building
 RUN apt-get update && apt-get install -y \
   python3 \
   build-essential \
