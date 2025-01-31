@@ -1,23 +1,32 @@
-FROM node:18-alpine
+FROM node:18
 
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+  pkg-config \
+  libpango1.0-dev \
+  libcairo2-dev \
+  libjpeg-dev \
+  libgif-dev \
+  librsvg2-dev \
+  python3 \
+  make \
+  g++
+
+# Set environment variables
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+ENV NPM_CONFIG_FETCH_TIMEOUT=60000
+
+# Set the working directory
 WORKDIR /app
 
-COPY package*.json ./  # Correct: Copies from the build context (./backend)
-RUN npm install --production
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install --force
 
-COPY . .  # Correct: Copies everything else from the build context
+# Copy the rest of the application code
+COPY . .
 
-RUN npm run build
-
-# Multi-stage build (as before)
-FROM node:18-alpine AS production
-
-WORKDIR /app
-
-COPY --from=0 /app/dist ./dist
-COPY package*.json ./
-RUN npm install --production
-
+# Expose the necessary port
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+CMD ["npm", "start"]

@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - "5432:5432" # Only expose if you need to access from host directly
+      - "5432:5432" # Expose for local access (optional)
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -27,18 +27,17 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_HOST: db  # Use the service name for internal DNS resolution
+      DATABASE_HOST: db  # Internal service name for DB
       DATABASE_PORT: 5432
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_NAME: ${DATABASE_NAME}
-      NODE_ENV: production # or development for dev mode
+      NODE_ENV: production
     networks:
       - app_network
     volumes:
-      - ./backend/uploads:/usr/src/app/uploads # Only mount uploads directory
-    # No need to mount the entire backend directory unless for active development
-    command: npm run start:prod # or npm run start:dev for development
+      - ./backend/uploads:/usr/src/app/uploads # Mount only necessary folders
+    command: npm run start:prod # Start in production mode
     env_file:
       - ./backend/.env
 
@@ -48,27 +47,24 @@ services:
       dockerfile: Dockerfile  # Specify the Dockerfile explicitly
     container_name: react_app
     ports:
-      - "80:80" # Use standard port 80
+      - "80:80" # React app is served by Nginx on port 80
     networks:
       - app_network
     depends_on:
       - nestjs-app
-    # No need to mount the entire frontend directory, the build artifacts are copied
-    # volumes:
-    #   - ./frontend:/usr/share/nginx/html
-    # Remove the React app container, it is served by Nginx
-    # command: ["nginx", "-g", "daemon off;"]
+    volumes:
+      - react_build:/usr/share/nginx/html  # Mount the build artifacts for Nginx
 
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "80:80" # Expose port 80 for React app through Nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf # Your Nginx config
-      - react_build:/usr/share/nginx/html  # Mount the React build directory
+      - ./nginx.conf:/etc/nginx/nginx.conf # Mount your custom Nginx config file
+      - react_build:/usr/share/nginx/html  # Mount React build output from volume
     depends_on:
-      - react-app # Nginx depends on the React app being built
+      - react-app # Nginx depends on React build being available
       - nestjs-app
     networks:
       - app_network
@@ -76,7 +72,7 @@ services:
 
 volumes:
   postgres_data:
-  react_build: # Define a volume for the React build
+  react_build:  # Persistent volume for the React build output
 
 networks:
   app_network:
