@@ -10,6 +10,8 @@ WORKDIR /usr/src/app
 # Install NestJS CLI globally
 RUN npm install -g @nestjs/cli
 
+ENV PYTHON=/usr/bin/python3
+
 # Copy package.json and package-lock.json (or yarn.lock if you're using yarn)
 COPY package*.json ./
 
