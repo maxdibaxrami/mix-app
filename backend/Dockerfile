@@ -4,8 +4,11 @@ FROM node:18-alpine AS base
 # Set working directory
 WORKDIR /usr/src/app
 
+RUN echo "https://dl-4.alpinelinux.org/alpine/v3.21/main" > /etc/apk/repositories && \
+    echo "https://dl-4.alpinelinux.org/alpine/v3.21/community" >> /etc/apk/repositories
+
 # Install Python, build tools, and dependencies for canvas
-#RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
 RUN apk update && apk add --no-cache python3 py3-pip build-base
 
 # Install NestJS CLI globally
