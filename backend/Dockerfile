@@ -4,6 +4,9 @@ FROM node:18-alpine AS base
 # Set working directory
 WORKDIR /usr/src/app
 
+# Change Alpine repository to an accessible mirror
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirror.math.princeton.edu/g' /etc/apk/repositories
+
 # Install Python, build tools, and dependencies for canvas
 RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
 
