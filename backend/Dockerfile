@@ -1,26 +1,32 @@
-# Dockerfile for NestJS (Backend)
-# Stage 1: Build Stage (Node.js based on Debian)
-FROM node:18 AS build
+FROM node:18
 
-# Set the working directory inside the container
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+  pkg-config \
+  libpango1.0-dev \
+  libcairo2-dev \
+  libjpeg-dev \
+  libgif-dev \
+  librsvg2-dev \
+  python3 \
+  make \
+  g++
+
+# Set environment variables
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+ENV NPM_CONFIG_FETCH_TIMEOUT=60000
+
+# Set the working directory
 WORKDIR /app
 
-# Install required system dependencies (for canvas and others)
-
-# Copy package.json and package-lock.json (if using npm)
+# Copy package.json and install dependencies
 COPY package.json package-lock.json ./
-
-# Install Node.js dependencies
 RUN npm install --force
 
-# Copy the rest of the application files
+# Copy the rest of the application code
 COPY . .
 
-# Build the NestJS app
-RUN npm run build
-
-# Expose the port NestJS will run on
+# Expose the necessary port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "start"]
