@@ -6,7 +6,6 @@ FROM node:18
 ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 
 # Install npm and node-gyp
-RUN npm install -g npm@11.1.0
 RUN npm install -g node-gyp
 
 # Set environment variables to improve npm installation
