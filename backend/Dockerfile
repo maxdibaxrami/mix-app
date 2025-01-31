@@ -5,7 +5,7 @@ FROM node:18-alpine AS base
 WORKDIR /usr/src/app
 
 # Install Python, build tools, and dependencies for canvas
-RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
+#RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
 
 # Install NestJS CLI globally
 RUN npm install -g @nestjs/cli
