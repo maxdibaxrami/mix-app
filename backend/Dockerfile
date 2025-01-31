@@ -1,13 +1,15 @@
 FROM node:18
 
-# Set the environment to production
+# Set the environment for production
 ENV NODE_ENV=production
 
 # Set the pkg-config path
 ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 
-# Install necessary system dependencies for canvas (including pkg-config, Cairo, Pango, etc.)
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.edge.kernel.org/ubuntu/|' /etc/apt/sources.list && \
+# Install necessary dependencies
+RUN apt-get update -o Acquire::http::Timeout=60 && \
+    apt-get install -y apt-transport-https ca-certificates && \
+    sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.edge.kernel.org/ubuntu/|' /etc/apt/sources.list && \
     apt-get update -o Acquire::http::Timeout=60 && \
     apt-get install -y \
     libpango1.0-dev \
@@ -21,20 +23,22 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.edge.kernel.org/u
     g++ && \
     rm -rf /var/lib/apt/lists/*
 
+# Install node-gyp globally
+RUN npm install -g node-gyp
+
+# Set npm environment variables to improve canvas installation
+ENV npm_config_canvas_binary=true
+ENV npm_config_fetch_timeout=60000
+
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for npm install
+# Copy package.json and install dependencies
 COPY package.json package-lock.json ./
-
-# Install production dependencies only
-RUN npm ci --only=production
+RUN npm install --force
 
 # Copy the rest of the application code
 COPY . .
-
-# Remove build dependencies to keep the image smaller
-RUN apt-get purge -y make g++ python3 && rm -rf /var/lib/apt/lists/*
 
 # Expose the necessary port
 EXPOSE 3000
