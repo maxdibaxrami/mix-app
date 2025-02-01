@@ -1,24 +1,17 @@
 # Base image
-FROM node:18
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /usr/src/app
 
 # Install Python, build tools, and dependencies for canvas
-RUN apt-get update && apt-get install -y \
-    python3 \
-    build-essential \
-    pkg-config \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libpixman-1-dev \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig --no-cache libc6-compat
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
