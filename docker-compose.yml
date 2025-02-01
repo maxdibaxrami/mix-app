@@ -43,7 +43,7 @@ services:
 
   react-app:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     image: react-app:latest
     container_name: react_app
