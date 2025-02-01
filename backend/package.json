@@ -33,6 +33,7 @@
     "@nestjs/typeorm": "^10.0.2",
     "@nestjs/websockets": "^10.4.8",
     "@telegram-apps/init-data-node": "^1.2.0",
+    "@tensorflow/tfjs-node": "^4.22.0",
     "@types/passport": "^1.0.17",
     "@types/passport-jwt": "^4.0.1",
     "axios": "^1.7.9",
