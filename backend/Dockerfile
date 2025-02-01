@@ -1,5 +1,16 @@
 FROM node:18
 
+
+# Install necessary packages for canvas
+RUN apt-get update && apt-get install -y \
+    libcairo2-dev \
+    libjpeg-dev \
+    libpango1.0-dev \
+    libgif-dev \
+    build-essential \
+    g++ \
+    pkg-config
+
 # Set the environment for production
 ENV NODE_ENV=production
 
