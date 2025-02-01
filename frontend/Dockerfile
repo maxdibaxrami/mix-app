@@ -24,7 +24,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the build output from the build stage to Nginx's public folder
 # Since 'dist' is in the root of the project, we copy it directly from there
-COPY --from=build /dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html  # Ensure the correct path
 
 # Expose port 80 to serve the app
 EXPOSE 80
