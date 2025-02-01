@@ -59,21 +59,18 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "8080:80" # Expose port 80 for React app through Nginx
-      - "443:443" # Expose port 443 for HTTPS
+      - "8080:80"  # Expose port 80 for React app through Nginx
+      - "8443:443" # Expose port 443 for HTTPS
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf # Mount your custom Nginx config file
+      - ./nginx/ssl:/etc/nginx/ssl # Mount the SSL folder into the container
+      - ./nginx/ssl/nginx.conf:/etc/nginx/nginx.conf  # Mount nginx.conf if necessary
       - react_build:/usr/share/nginx/html  # Mount React build output from volume
-      - ./path/to/ssl:/etc/nginx/ssl # Mount your local SSL folder to the container
     depends_on:
       - react-app # Nginx depends on React build being available
       - nestjs-app
     networks:
       - app_network
     restart: always
-    environment:
-      - NGINX_HOST=localhost
-      - NGINX_PORT=443
 
 volumes:
   postgres_data:
