@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the React app with Vite (ensure you're using the correct build command for Vite)
+# Build the React app with Vite
 RUN npm run build
 
 # Stage 2: Serve the app with Nginx
