@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - "5432:5432" # Expose for local access (optional)
+      - "5432:5432"  # Expose for local access (optional)
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -36,32 +36,36 @@ services:
     networks:
       - app_network
     volumes:
-      - ./backend/uploads:/usr/src/app/uploads # Mount only necessary folders
-    command: npm run start:prod # Start in production mode
+      - ./backend/uploads:/usr/src/app/uploads
+    command: npm run start:prod
     env_file:
       - ./backend/.env
 
   react-app:
     build:
       context: ./frontend
-      dockerfile: Dockerfile   # Ensure it's pointing to the correct Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - "8080:80"  # Exposing the Nginx port for frontend access
+      - "8081:80"  # Expose React app on port 8081
     depends_on:
-      - nestjs-app  # In case you have a dependency on the NestJS backend
+      - nestjs-app
+    volumes:
+      - react_build:/usr/share/nginx/html  # Mount React build output
+    networks:
+      - app_network
 
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
     ports:
-      - "8080:80"  # Expose port 80 for React app through Nginx
+      - "8080:80"  # Nginx frontend exposed on port 8080
       - "8443:443" # Expose port 443 for HTTPS
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./frontend/dist:/usr/share/nginx/html # React build output directory
+      - ./frontend/dist:/usr/share/nginx/html # React build output
       - ./nginx/ssl:/etc/nginx/ssl # SSL certificates
     depends_on:
-      - react-app # Nginx depends on React build being available
+      - react-app
       - nestjs-app
     networks:
       - app_network
@@ -69,9 +73,9 @@ services:
 
 volumes:
   postgres_data:
-  react_build:  # Persistent volume for the React build output
-  nginx_ssl: 
-    external: true  # Make sure your SSL certificates are available
+  react_build:  # Persistent volume for React build output
+  nginx_ssl:
+    external: true
 
 networks:
   app_network:
