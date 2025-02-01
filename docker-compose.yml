@@ -62,8 +62,6 @@ services:
       - "8080:80"  # Expose port 80 for React app through Nginx
       - "8443:443" # Expose port 443 for HTTPS
     volumes:
-      - ./nginx/ssl:/etc/nginx/ssl # Mount the SSL folder into the container
-      - ./nginx/ssl/nginx.conf:/etc/nginx/nginx.conf  # Mount nginx.conf if necessary
       - react_build:/usr/share/nginx/html  # Mount React build output from volume
     depends_on:
       - react-app # Nginx depends on React build being available
