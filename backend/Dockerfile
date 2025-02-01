@@ -1,33 +1,26 @@
+# Base image
 FROM node:18-alpine
 
+# Set working directory
+WORKDIR /usr/src/app
 
-# Install dependencies for canvas and other native modules
-RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
+# Install Python, build tools, and dependencies for canvas
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig --no-cache libc6-compat
 
-# Set the environment for production
-ENV NODE_ENV=production
-
-# Set the pkg-config path
-ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
-
-
-# Set npm environment variables to improve canvas installation
-ENV npm_config_canvas_binary=true
-ENV npm_config_fetch_timeout=60000
-ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
-
-# Set the working directory
-WORKDIR /app
-
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm install --force
+
+# Install dependencies
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
-# Expose the necessary port
+# Build the NestJS app
+RUN npm run build
+
+# Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+# Start the NestJS application
+CMD ["npm", "run", "start:prod"]
