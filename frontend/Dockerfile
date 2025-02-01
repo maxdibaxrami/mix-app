@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json for dependency installation
 COPY package.json package-lock.json ./
 
-# Install dependencies
+# Install dependencies (npm is available in this stage)
 RUN npm install
 
 # Copy the rest of the application code
@@ -23,6 +23,7 @@ FROM nginx:stable-alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the build output from the build stage to Nginx's public folder
+# Since 'dist' is in the root of the project, we copy it directly from there
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80 to serve the app
