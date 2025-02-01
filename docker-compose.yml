@@ -49,22 +49,16 @@ services:
       - "8080:80"  # Exposing the Nginx port for frontend access
     depends_on:
       - nestjs-app  # In case you have a dependency on the NestJS backend
-  nginx:
-    image: nginx:stable-alpine
-    ports:
-      - "8080:80"  # Exposing the Nginx port for frontend access
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./frontend/dist:/usr/share/nginx/html
 
   nginx:
-    image: nginx:latest
+    image: nginx:stable-alpine
     container_name: nginx
     ports:
       - "8080:80"  # Expose port 80 for React app through Nginx
       - "8443:443" # Expose port 443 for HTTPS
     volumes:
-      - react_build:/usr/share/nginx/html  # Mount React build output from volume
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/dist:/usr/share/nginx/html # React build output directory
       - ./nginx/ssl:/etc/nginx/ssl # SSL certificates
     depends_on:
       - react-app # Nginx depends on React build being available
