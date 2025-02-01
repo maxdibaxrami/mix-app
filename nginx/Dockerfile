@@ -8,7 +8,7 @@ COPY ./ssl/certificate.crt /etc/nginx/ssl/certificate.crt
 COPY ./ssl/certificate.key /etc/nginx/ssl/certificate.key
 
 # Copy frontend build
-COPY ./frontend/dist /usr/share/nginx/html
+COPY ./frontend/app/dist /usr/share/nginx/html
 
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
