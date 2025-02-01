@@ -14,8 +14,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - app_network
-    dns:
-      - dns-proxy
     env_file:
       - .env
 
@@ -40,8 +38,6 @@ services:
     volumes:
       - ./backend/uploads:/usr/src/app/uploads # Mount only necessary folders
     command: npm run start:prod # Start in production mode
-    dns:
-      - dns-proxy
     env_file:
       - ./backend/.env
 
@@ -59,8 +55,6 @@ services:
       - nestjs-app
     volumes:
       - react_build:/usr/share/nginx/html  # Mount the build artifacts for Nginx
-    dns:
-      - dns-proxy
 
   nginx:
     image: nginx:latest
@@ -73,19 +67,6 @@ services:
     depends_on:
       - react-app # Nginx depends on React build being available
       - nestjs-app
-    networks:
-      - app_network
-    restart: always
-    dns:
-      - dns-proxy
-
-  dns-proxy:
-    image: proyector/dnsproxy
-    container_name: dnsproxy
-    ports:
-      - "53:53/udp"
-    environment:
-      - DNS_OVER_TLS_URL=free.shecan.ir
     networks:
       - app_network
     restart: always
