@@ -1,7 +1,10 @@
 # Stage 1: Build the React app
-FROM node:18
+FROM node:18 as build
 
 WORKDIR /app
+
+# Install dependencies for canvas
+RUN apt-get update && apt-get install -y python3 make g++ pkg-config libcairo2-dev libpango1.0-dev libpixman-1-dev
 
 # Copy package.json and install dependencies
 COPY package.json package-lock.json ./
