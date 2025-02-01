@@ -3,7 +3,7 @@ FROM node:18 AS build
 
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json to install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
@@ -16,8 +16,11 @@ RUN npm run build
 # Stage 2: Serve the app with Nginx
 FROM nginx:stable
 
-# Copy the build folder from the 'build' stage
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy the 'dist' folder from the 'build' stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
+# Expose port 80
 EXPOSE 80
+
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
