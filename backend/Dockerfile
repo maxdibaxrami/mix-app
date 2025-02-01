@@ -10,6 +10,7 @@ ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 # Set npm environment variables to improve canvas installation
 ENV npm_config_canvas_binary=true
 ENV npm_config_fetch_timeout=60000
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 
 # Set the working directory
 WORKDIR /app
