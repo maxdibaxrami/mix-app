@@ -1,9 +1,16 @@
 FROM node:18
 
 
-# Install necessary packages for canvas
-RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig --no-cache libc6-compat
-
+# Install dependencies for canvas and other native modules
+RUN apt-get python3 \
+    make \
+    g++ \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libpixman-1-dev \
+    pkg-config \
+    libc6-compat \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the environment for production
 ENV NODE_ENV=production
