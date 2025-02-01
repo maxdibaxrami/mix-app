@@ -53,8 +53,7 @@ services:
       - app_network
     depends_on:
       - nestjs-app
-    volumes:
-      - react_build:/usr/share/nginx/html  # Mount the build artifacts for Nginx
+    # Removed volume from react-app service, as nginx handles serving build
 
   nginx:
     image: nginx:latest
