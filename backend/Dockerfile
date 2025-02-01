@@ -4,6 +4,8 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /usr/src/app
 
+RUN sed -i 's|http://dl-cdn.alpinelinux.org|https://mirror.csclub.uwaterloo.ca|g' /etc/apk/repositories
+
 # Install Python, build tools, and dependencies for canvas
 RUN apk add --no-cache python3 make g++ pkg-config cairo-dev pango-dev pixman-dev
 
