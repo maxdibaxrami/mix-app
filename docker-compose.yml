@@ -47,13 +47,13 @@ services:
       dockerfile: Dockerfile
     image: react-app:latest
     container_name: react_app
-    ports:
-      - "8081:80" # React app is served by Nginx on port 80
     networks:
       - app_network
     depends_on:
       - nestjs-app
-    # Removed volume from react-app service, as nginx handles serving build
+    command: npm run build # Ensure React app is built
+    volumes:
+      - react_build:/usr/src/app/build # Persist React build files
 
   nginx:
     image: nginx:latest
@@ -63,6 +63,7 @@ services:
       - "8443:443" # Expose port 443 for HTTPS
     volumes:
       - react_build:/usr/share/nginx/html  # Mount React build output from volume
+      - ./nginx/ssl:/etc/nginx/ssl # SSL certificates
     depends_on:
       - react-app # Nginx depends on React build being available
       - nestjs-app
@@ -73,9 +74,8 @@ services:
 volumes:
   postgres_data:
   react_build:  # Persistent volume for the React build output
-  # /etc/nginx/ssl volume for SSL certificates
   nginx_ssl: 
-    external: true
+    external: true  # Make sure your SSL certificates are available
 
 networks:
   app_network:
