@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+PYTHON=/usr/bin/python3
+
 # Install dependencies
 RUN npm install
 
