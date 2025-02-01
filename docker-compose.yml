@@ -43,8 +43,9 @@ services:
 
   react-app:
     build:
-      context: ./frontend
+      context: .
       dockerfile: Dockerfile
+    image: react-app:latest
     container_name: react_app
     ports:
       - "80:80" # React app is served by Nginx on port 80

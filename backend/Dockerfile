@@ -4,11 +4,6 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /usr/src/app
 
-RUN sed -i 's|http://dl-cdn.alpinelinux.org|https://mirror.csclub.uwaterloo.ca|g' /etc/apk/repositories
-
-# Install Python, build tools, and dependencies for canvas
-RUN apk add -v --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
-
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
@@ -16,6 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application code
+
 COPY . .
 
 # Build the NestJS app
