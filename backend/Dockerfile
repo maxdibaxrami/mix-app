@@ -1,11 +1,18 @@
 # Base image
-FROM node:18-alpine
+FROM node:18
 
 # Set working directory
 WORKDIR /usr/src/app
 
 # Install Python, build tools, and dependencies for canvas
-RUN apk add python3 make g++ pkg-config cairo-dev pango-dev pixman-dev
+RUN apt-get update && apt-get install -y \
+    python3 \
+    build-essential \
+    pkg-config \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libpixman-1-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -14,7 +21,6 @@ COPY package*.json ./
 RUN npm install --force
 
 # Copy the rest of the application code
-
 COPY . .
 
 # Build the NestJS app
