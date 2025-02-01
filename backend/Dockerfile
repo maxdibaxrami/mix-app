@@ -2,14 +2,8 @@ FROM node:18
 
 
 # Install necessary packages for canvas
-RUN apt-get update && apt-get install -y \
-    libcairo2-dev \
-    libjpeg-dev \
-    libpango1.0-dev \
-    libgif-dev \
-    build-essential \
-    g++ \
-    pkg-config
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig --no-cache libc6-compat
+
 
 # Set the environment for production
 ENV NODE_ENV=production
@@ -27,7 +21,7 @@ ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install --force
 
 # Copy the rest of the application code
