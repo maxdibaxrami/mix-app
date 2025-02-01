@@ -1,16 +1,8 @@
-FROM node:18
+FROM node:18-alpine
 
 
 # Install dependencies for canvas and other native modules
-RUN apt-get python3 \
-    make \
-    g++ \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libpixman-1-dev \
-    pkg-config \
-    libc6-compat \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev pixman-dev pkgconfig libc6-compat
 
 # Set the environment for production
 ENV NODE_ENV=production
