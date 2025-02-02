@@ -4,7 +4,7 @@ import {
   HeartIcon,
 } from "@/Icons";
 
-export const BASEURL = "https://copychic.online/"
+export const BASEURL = "https://copychic.ru/"
 
     
 export const getlookingfor = (t) => [
