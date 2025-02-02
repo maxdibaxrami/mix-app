@@ -52,34 +52,30 @@ services:
       - app_network
     volumes:
       - ./frontend/dist:/usr/share/nginx/html
-      - ./ssl:/etc/nginx/ssl
-
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
       interval: 10s
       retries: 3
 
-    nginx:
-      image: nginx:stable-alpine
-      container_name: nginx
-      depends_on:
-        - react-app
-        - nestjs-app
-      ports:
-        - "80:80"
-        - "443:443"
-      volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf
-        - ./frontend/dist:/usr/share/nginx/html
-        - ./ssl:/etc/nginx/ssl  # Ensure SSL folder is copied
-      networks:
-        - app_network
-
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    depends_on:
+      - react-app
+      - nestjs-app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/dist:/usr/share/nginx/html
+      - ./ssl:/etc/nginx/ssl  # Ensure SSL folder is copied
+    networks:
+      - app_network
 
 volumes:
   postgres_data:
   react_build:
-  - ./ssl:/etc/nginx/ssl
 
 networks:
   app_network:
