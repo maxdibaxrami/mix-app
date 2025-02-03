@@ -53,6 +53,7 @@ services:
     volumes:
       - ./frontend/dist:/usr/share/nginx/html
       - /var/www/frontend/dist:/var/www/frontend/dist
+      - /var/www/frontend/dist:/app/dist
 
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
