@@ -18,6 +18,7 @@ async function bootstrap() {
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
     allowedHeaders: 'Content-Type, Accept', // Allow specific headers
   });
+  app.setGlobalPrefix('api');  // This will make all routes start with /api
 
   // Start the application
   await app.listen(process.env.PORT ?? 3000);
