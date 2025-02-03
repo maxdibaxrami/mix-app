@@ -57,7 +57,6 @@ services:
       interval: 10s
       retries: 3
 
-
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
@@ -74,24 +73,10 @@ services:
       - react_build:/usr/share/nginx/html  # Mount React build output from volume
     networks:
       - app_network
-      image: nginx:stable-alpine
-      container_name: nginx
-      depends_on:
-        - react-app
-        - nestjs-app
-      ports:
-        - "80:80"
-        - "443:443"
-      volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf
-        - ./frontend/dist:/usr/share/nginx/html
-        - ./ssl:/etc/nginx/ssl  # Ensure SSL folder is copied
-        - react_build:/usr/share/nginx/html  # Mount React build output from volume
 
 volumes:
   postgres_data:
   react_build:
-
 
 networks:
   app_network:
