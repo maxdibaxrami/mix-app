@@ -10,7 +10,7 @@ export const getLocation = (setError: (error: string) => void, setLocation: (loc
     // Request location permission from Telegram
     // @ts-ignore
     window.Telegram.WebApp.requestLocation({
-      timeout: 5000, // optional: timeout for the location request
+      timeout: 10000, // optional: timeout for the location request
       accuracy: 'high' // optional: accuracy level of the location data
     })
     .then((position) => {
