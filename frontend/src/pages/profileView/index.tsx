@@ -18,7 +18,7 @@ export default function ProfileViewPage() {
   const lp = useLaunchParams();
   
   const profileViews = useMemo(() => {
-    return data && data.profileViews
+    return data && data?.profileViews
   }, [data])
 
   if(loading){
@@ -64,14 +64,14 @@ export default function ProfileViewPage() {
                 style={{paddingTop:`calc(4rem + ${getPaddingForPlatform()})`}}  
               >
       
-        <motion.div 
-          className="grid gap-2 grid-cols-2 py-2"
-          style={{
-            paddingBottom: "6rem",
-            paddingLeft:"18px",
-            paddingRight:"18px"
-          }}
-        >
+          <motion.div 
+            className="grid gap-2 grid-cols-2 py-2"
+            style={{
+              paddingBottom: "6rem",
+              paddingLeft:"18px",
+              paddingRight:"18px"
+            }}
+          >
 
           {data && profileViews.map((value, index) => (<ProfileViewCard key={index} data={value} />))}
 

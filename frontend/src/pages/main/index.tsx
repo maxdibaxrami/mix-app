@@ -253,7 +253,7 @@ const MainPage = () => {
                                     aria-label="Like"
                                     color="primary"
                                     as={Link}
-                                    to={'/add-firends'}
+                                    to={'/energy'}
                                     className='bg-primary/80 backdrop-blur'
       
                                   >

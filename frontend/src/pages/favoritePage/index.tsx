@@ -17,7 +17,7 @@ export default function FavoriteViewPage() {
   const { data, loading } = useSelector((state: RootState) => state.user);  // Assuming the like slice is in state.like
 
   const favoriteUsers = useMemo(() => {
-    return data && data.favoriteUsers
+    return data && data?.favoriteUsers
   }, [data])
 
   const lp = useLaunchParams();

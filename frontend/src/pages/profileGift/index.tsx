@@ -18,7 +18,7 @@ export default function GiftViewPage() {
   const lp = useLaunchParams();
   
   const giftUsers = useMemo(() => {
-    return data && data.giftUsers
+    return data && data?.giftUsers
   }, [data])
 
   if(loading){
