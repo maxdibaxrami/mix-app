@@ -9,11 +9,10 @@ RUN apk add --no-cache \
   python3 \
   make \
   g++ \
-  libjpeg-dev \
+  libjpeg-turbo-dev \
   cairo-dev \
   pango-dev \
-  gdk-pixbuf-dev \
-  && npm install --global --production windows-build-tools
+  gdk-pixbuf-dev
   
 # Copy package.json and package-lock.json
 COPY package*.json ./
