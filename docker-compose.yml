@@ -37,6 +37,9 @@ services:
       - app_network
     volumes:
       - ./backend/uploads:/usr/src/app/uploads
+      - ./backend/uploads:/root/mix-app/backend/uploads
+
+
     command: npm run start:prod
     env_file:
       - ./backend/.env

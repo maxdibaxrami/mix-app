@@ -11,6 +11,7 @@ async function bootstrap() {
     rootPath: join(__dirname, '..', 'uploads'), // Correct path to 'uploads'
     serveRoot: '/uploads', // This will make files accessible via '/uploads' URL path
   }),
+  
   // Enable CORS
   app.enableCors({
     origin: '*', // Allow all origins. You can specify a specific domain if needed.
