@@ -44,8 +44,8 @@ export async function processImage(inputFilePath: string): Promise<{ largeImageP
       await fs.writeFile(tempJpegPath, outputBuffer);
 
       // Save the large and small versions in different folders
-      await sharp(tempJpegPath).rotate().resize(largeSize).webp().toFile(largeImagePath);
-      await sharp(tempJpegPath).rotate().resize(smallSize).webp().toFile(smallImagePath);
+      await sharp(tempJpegPath).rotate(90).resize(largeSize).webp().toFile(largeImagePath);
+      await sharp(tempJpegPath).rotate(90).resize(smallSize).webp().toFile(smallImagePath);
 
       // Cleanup temporary file
       await fs.unlink(tempJpegPath);
