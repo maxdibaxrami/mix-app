@@ -1,21 +1,39 @@
 import axios from "axios";
 
-export const getLocation = (setError, setLocation, setCoordinates) => {
-  if (navigator.geolocation) {
+
+// Check if running inside Telegram Mini App 
+// @ts-ignore
+const isTelegramWebApp = window && window.Telegram && window.Telegram.WebApp;
+
+export const getLocation = (setError: (error: string) => void, setLocation: (location: string) => void, setCoordinates: (coordinates: { lat: number, lon: number }) => void) => {
+  if (isTelegramWebApp) {
+    // Request location permission from Telegram
+    // @ts-ignore
+    window.Telegram.WebApp.requestLocation({
+      timeout: 5000, // optional: timeout for the location request
+      accuracy: 'high' // optional: accuracy level of the location data
+    })
+    .then((position) => {
+      onSuccess(position, setError, setLocation, setCoordinates);
+    })
+    .catch((error) => {
+      setError('Error getting position from Telegram: ' + error.message);
+    });
+  } else if (navigator.geolocation) {
+    // Fallback to browser's geolocation if not in Telegram WebApp
     navigator.geolocation.getCurrentPosition(
       (position) => onSuccess(position, setError, setLocation, setCoordinates),
       (error) => {
-        // Handle geolocation errors
         setError('Error getting position: ' + error.message);
       }
     );
   } else {
-    setError('Geolocation is not supported by this browser.');
+    setError('Geolocation is not supported by this browser or Telegram Mini App.');
   }
 };
 
-export const onSuccess = async (position, setError, setLocation, setCoordinates) => {
-  const { latitude, longitude } = position.coords;
+export const onSuccess = async (position: { latitude: number, longitude: number } | GeolocationPosition, setError: (error: string) => void, setLocation: (location: string) => void, setCoordinates: (coordinates: { lat: number, lon: number }) => void) => {
+  const { latitude, longitude } = 'coords' in position ? position.coords : position; // Handle both browser and Telegram location object
 
   // Set the coordinates
   console.log('Coordinates:', latitude, longitude);

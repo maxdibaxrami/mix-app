@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 const LocationModal = () => {
-
+ 
   const { t } = useTranslation();
   const { data: user } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -31,6 +31,7 @@ const LocationModal = () => {
 
   useEffect(() => {
     getLocation(setError, setLocation, setCoordinates);
+    
   }, []);
 
   const onPress = async () => {
