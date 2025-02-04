@@ -38,7 +38,7 @@ export class TelegramController {
     const token = '7629971501:AAGXQE13v9Anu6Gf8hRbVKYeCnHhppyA_Ko'; // Replace with your bot's token
     const url = `https://api.telegram.org/bot${token}/sendPhoto`;
 
-    const photoUrl = 'https://copychic.ru/uploads/profile-pictures/1736710779472-c0754815.webp'; // Example file_id
+    const photoUrl = 'https://copychic.ru/uploads/profile-pictures/large/1738689772955-fa0597d7.webp'; // Example file_id
 
     const result = await axios.post(
       url,
