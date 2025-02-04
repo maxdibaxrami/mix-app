@@ -29,7 +29,7 @@ const MobileApp = ({ children }) => {
           : { overflowX: "hidden", overflowY: "auto" }
       }
       animate={keyboardOpen ? { height: `${viewportHeight}px` } : { height: "100vh" }}
-      className="fixed w-screen left-0 top-0 right-0 bottom-0"
+      className="fixed w-screen left-0 top-0 right-0 bottom-0 "
       id="wrap"
     >
       <motion.div className="relative" id="content" animate={keyboardOpen ? { height: `${viewportHeight + 1}px` } : { height: "calc(100% + 1px)" }}>

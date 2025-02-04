@@ -18,7 +18,6 @@ import { fetchLikes } from '@/features/likeSlice';
 import { fetchMatches } from '@/features/matchSlice';
 import { fetchFilteredExplore } from '@/features/exploreSlice';
 import { fetchConversations } from '@/features/conversationsSlice';
-import { Toaster } from 'react-hot-toast';
 import { fetchNearBySliceUsers, setFilters } from '@/features/nearBySlice';
 import { fetchReferralData } from '@/features/refralSlice';
 import MobileApp from './wapper';
@@ -159,7 +158,6 @@ export function App() {
             
             </Routes>
         </HashRouter>
-        <Toaster />
       </AppRoot>
     </I18nextProvider>
   );

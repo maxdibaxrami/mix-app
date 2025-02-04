@@ -8,6 +8,7 @@ import { Page } from '@/components/Page.tsx';
 import TopBarPages from "@/components/tobBar/index";
 import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { GiftNotFound } from "@/Icons/giftIcon";
+import { useMemo } from "react";
 
 
 
@@ -15,6 +16,10 @@ export default function GiftViewPage() {
   const { t } = useTranslation();  // Initialize translation hook
   const { data, loading } = useSelector((state: RootState) => state.user);  // Assuming the like slice is in state.like
   const lp = useLaunchParams();
+  
+  const giftUsers = useMemo(() => {
+    return data && data.giftUsers
+  }, [data])
 
   if(loading){
     return <div className="h-screen w-screen flex flex-col p-6 items-center justify-center"> 
@@ -24,9 +29,11 @@ export default function GiftViewPage() {
   if(!loading && data.giftUsers.length === 0){
     return <Page>
       <div className="h-screen w-screen flex flex-col p-6 items-center justify-center"> 
+        <TopBarPages />
+
         <GiftNotFound/>
         <div className="flex gap-4 flex-col px-6 text-center items-center">
-        <p className="font-bold">{t("data_not_found")}</p>
+        <p className="font-medium">{t("data_not_found")}</p>
         </div>
     </div>
     </Page>
@@ -67,7 +74,7 @@ export default function GiftViewPage() {
           }}
         >
 
-          {data.giftUsers.map((value, index) => (<ProfileGiftViewCard key={index} data={value} />))}
+          {data && giftUsers.map((value, index) => (<ProfileGiftViewCard key={index} data={value} />))}
 
         </motion.div >
         </section>

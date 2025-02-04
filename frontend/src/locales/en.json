@@ -346,7 +346,7 @@
     "150_Energy":"150 Energy",
     "500_Energy":"500 Energy",
     "1000_Energy":"1000 Energy",
-    "data_not_found":"data not found",
+    "data_not_found":"No data available for display.",
     "min_max_2_18":"Minimum enter 2 characters and maximum 18",
     "min_max_2_100":"Minimum enter 2 characters and maximum 100",
     "access_to_location":"Access to location",

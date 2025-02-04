@@ -212,7 +212,7 @@ const MainPage = () => {
                               {
                                 position: "fixed",
                                 zIndex: 11,
-                                left: -50,
+                                left: -45,
                                 top:"130px",
                                 display:"flex",
                                 width:"100px",
@@ -226,7 +226,7 @@ const MainPage = () => {
                               {
                               position: "fixed",
                               zIndex: 11,
-                              right: -50,
+                              right: -45,
                               top:"130px",
                               display:"flex",
                               width:"100px",
@@ -247,7 +247,7 @@ const MainPage = () => {
                                 text={
                                   <Button
                                     variant="light"
-                                    size="sm"
+                                    size="md"
                                     radius="full"
                                     isIconOnly
                                     aria-label="Like"
@@ -258,8 +258,8 @@ const MainPage = () => {
       
                                   >
                                     <div className='flex items-center flex-col relative'>
-                                      <FlashIcon fill="#FFF" className="size-4 mt-1"/>
-                                      <small className='p-0 m-0 font-bold' style={{fontSize:"8px",color:"#FFF",marginTop:"-4px"}}>{user.rewardPoints}</small>
+                                      <FlashIcon fill="#FFF" className="size-5 mt-1"/>
+                                      <small className='p-0 m-0 font-bold' style={{fontSize:"10px",color:"#FFF",marginTop:"-4px"}}>{user.rewardPoints}</small>
                                     </div>
                                   </Button>
                                 }
