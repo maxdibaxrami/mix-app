@@ -12,12 +12,13 @@ import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { Button } from '@nextui-org/button';
 import { FitlerIcon, FlashIcon } from '@/Icons';
 import NearByFilter from '@/components/naerby/NearByFilter';
-import { useRef } from 'react';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { AppDispatch, RootState } from '@/store';
 import { SparklesFlashIconText } from '@/components/animate/flash-sparkles';
 import { useTranslation } from 'react-i18next';
-import LocationModal from '@/components/location/modal';
+import { getLocation } from '@/Location';
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserData } from '@/features/userSlice';
 
 const MainPage = () => {
   const { i18n } = useTranslation();
@@ -27,6 +28,9 @@ const MainPage = () => {
   const FilterRef = useRef();
   const { data: user } = useSelector((state: RootState) => state.user);
 
+  const dispatch: AppDispatch = useDispatch();
+
+  
     const getPaddingForPlatform = () => {
       if (['ios'].includes(lp.platform)) {
         // iOS/macOS specific padding (e.g., accounting for notches)
@@ -44,26 +48,49 @@ const MainPage = () => {
       }
     };
 
+    const [location, setLocation] = useState(`${user.city}, ${user.country}`); 
+    const [coordinates, setCoordinates] = useState({ lat: Number(user.lat), lon: Number(user.lon)});
+    const [error, setError] = useState('');
+    console.log(error)
+    useEffect(() => {
+      getLocation(setError, setLocation, setCoordinates);
+    }, []);
+    
+  
+    const onLocation = async () => {
+      if( `${user.city}, ${user.country}` !== location )
+      {
+        await dispatch(updateUserData({ userId: user.id.toString(), updatedData:{
+          country: location.split(',')[1].trim(),
+          city: location.split(',')[0], 
+          lat: Number(coordinates.lat),
+          lon: Number(coordinates.lon),
+        }}));    
+      }
+  
+    }
+  
+    useCallback(()=> onLocation(),[location, coordinates])
+
     return <Page back={searchParams.get('page') === "explore"? true : false}>
+       
+            <AnimatePresence mode="wait">
+                <motion.div
+                  animate={{opacity: 1 }}
+                  exit={{opacity: 0 }}
+                  initial={{ opacity: 1 }}
+                  transition={{
+                    opacity: { duration: 0.6 },
+                  }}
+                >
+                    <TopBar/>
+                </motion.div>
+                  
 
-            
-          <AnimatePresence mode="wait">
-              <motion.div
-                animate={{opacity: 1 }}
-                exit={{opacity: 0 }}
-                initial={{ opacity: 1 }}
-                transition={{
-                  opacity: { duration: 0.6 },
-                }}
-              >
-                  <TopBar/>
-              </motion.div>
-                
+            </AnimatePresence>
 
-          </AnimatePresence>
-
-                
             <NavBar/>
+
             <section style={{paddingTop:`${getPaddingForPlatform()}`}} className="flex flex-col items-center justify-center gap-4 ">
 
               {searchParams.get('page') === "explore" && (
@@ -245,9 +272,7 @@ const MainPage = () => {
 
               <NearByFilter ref={FilterRef} />
 
-              {user.lat === null &&
-                <LocationModal/>
-              }
+        
 
             </section>
       
