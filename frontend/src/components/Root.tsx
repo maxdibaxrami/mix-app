@@ -1,7 +1,6 @@
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { NextUIProvider } from "@nextui-org/react";
 import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
-import { publicUrl } from '@/helpers/publicUrl.ts';
 import { ViewportHeightProvider } from '@/veiwPortContext';
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { App } from '@/components/App.tsx';
