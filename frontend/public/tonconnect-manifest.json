@@ -1,5 +1,9 @@
 {
   "url": "https://copychic.ru/",
-  "name": "Mull Mull",
-  "iconUrl": "<app-icon-url>"
+  "iconUrl": "https://copychic.ru/path-to-your-icon.png",
+  "theme": "light", 
+  "connect_wallet": {
+    "enabled": true
+  },
+  "permissions": ["wallet_connect", "send_transaction"]
 }

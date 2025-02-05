@@ -5,45 +5,46 @@ import { TonConnect } from "@tonconnect/sdk";
 import { TON_WALLET } from "./constant";
 
 // Initialize the TonConnect instance
-const connector = new TonConnect();
-
+const tonConnect = new TonConnect({
+  manifestUrl: "/tonconnect-manifest.json",  // Point to your hosted manifest.json
+});
 export const connectTONWallet = async () => {
   try {
-    if (connector.connected) {
+    // Check if the wallet is connected
+    if (tonConnect.connected) {
       console.log("Wallet is already connected.");
-      return true; // If wallet is already connected, return true
+      return true;
     }
 
     // Fetch available wallets
-    const wallets = await connector.getWallets();
-    console.log("Available wallets:", wallets);
-
+    const wallets = await tonConnect.getWallets();
     if (wallets.length === 0) {
       alert("No TON wallet found. Please install a wallet.");
       return false;
     }
 
     // Connect to the first available wallet
-    await connector.connect(wallets[0]);
+    await tonConnect.connect(wallets[0]);
     console.log("Wallet connected successfully.");
     return true;
   } catch (error) {
     console.error("Failed to connect TON wallet:", error);
+    alert("Failed to connect the TON wallet. Please try again.");
     return false;
   }
 };
 
+
 export const sendTransaction = async ({ amount }) => {
   try {
-    // Ensure the wallet is connected before proceeding
-    if (!connector.connected) {
-      const isConnected = await connectTONWallet(); // Try to reconnect
+    if (!tonConnect.connected) {
+      console.log("No active connection. Reconnecting...");
+      const isConnected = await connectTONWallet();
       if (!isConnected) {
         throw new Error("Wallet is still not connected.");
       }
     }
 
-    // Create the transaction object
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 60, // Transaction valid for 60 seconds
       messages: [
@@ -58,7 +59,7 @@ export const sendTransaction = async ({ amount }) => {
     console.log("Transaction object:", transaction);
 
     // Send the transaction using the connector
-    await connector.sendTransaction(transaction);
+    await tonConnect.sendTransaction(transaction);
     console.log("Transaction sent successfully.");
     return true; // Transaction was successful
   } catch (error) {
