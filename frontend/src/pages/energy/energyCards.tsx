@@ -4,24 +4,26 @@ import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
 
 export const EnergyCard = ({ color, title, description, price, type }) => {
 
-  const handlePayment = async () => {
-    // Step 1: Connect the wallet
-    const isWalletConnected = await connectTONWallet();
-    
-    if (!isWalletConnected) {
-      alert("Please connect your TON wallet to proceed.");
-      return;
-    }
-
-    // Step 2: Payment logic (this will come in the next step)
-    console.log("Proceeding to payment...");
-
-    // Implement the payment transaction in the next step
-
+  const handlePaymentTon = async () => {
     try {
+      // Step 1: Connect the wallet
+      const isWalletConnected = await connectTONWallet();
+
+      if (!isWalletConnected) {
+        alert("Please connect your TON wallet to proceed.");
+        return;
+      }
+
+      // Step 2: Proceed with the transaction logic
+      console.log("Proceeding to payment...");
+
+      // Send the transaction
       await sendTransaction({ amount: price, type });
+
+      // If the transaction is successful
       alert("Transaction successful!");
     } catch (error) {
+      // Handle errors during wallet connection or transaction
       alert("Transaction failed: " + error.message);
     }
   };
@@ -47,7 +49,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
           radius="full"
           size="sm"
           variant={"solid"}
-          onClick={handlePayment} // Trigger wallet connection and payment on click
+          onClick={type === "ton" ? handlePaymentTon : undefined} // Trigger wallet connection and payment on click
         >
           {type === "star" ? (
             <PerimumIcon stroke="#FFF" fill="#FFF" className="size-5" />
