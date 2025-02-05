@@ -2,9 +2,8 @@
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, Card, CardBody, CardFooter, CardHeader, cn, Divider, Link, Spinner, Image, Avatar } from "@nextui-org/react";
+import { Button, Card, CardBody, CardFooter, CardHeader, cn, Divider, Spinner } from "@nextui-org/react";
 import { Page } from '@/components/Page.tsx';
-import TopBarPages from "@/components/tobBar/index";
 import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { FirendsIcon, FlashIcon} from "@/Icons";
 import { shareURL } from "@telegram-apps/sdk-react";

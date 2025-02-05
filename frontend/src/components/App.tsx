@@ -20,7 +20,7 @@ import { fetchFilteredExplore } from '@/features/exploreSlice';
 import { fetchConversations } from '@/features/conversationsSlice';
 import { fetchNearBySliceUsers, setFilters } from '@/features/nearBySlice';
 import { fetchReferralData } from '@/features/refralSlice';
-import MobileApp from './wapper';
+//import MobileApp from './wapper';
 
 const GetStoredLanguage = async () => {
   try {

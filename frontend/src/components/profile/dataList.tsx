@@ -1,9 +1,8 @@
 import { Listbox, ListboxItem, Chip, cn, Spinner } from "@nextui-org/react";
-import { ProfileIcon, LikeIcon, ViewIcon, PerimumIcon, ArrowRight, GiftIcon, FavoriteColor, VerifyIconFill } from "@/Icons/index";
+import { ProfileIcon, LikeIcon, ViewIcon, ArrowRight, GiftIcon, FavoriteColor, VerifyIconFill } from "@/Icons/index";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { SparklesStarText } from "../animate/star-sparkles";
 
 const DataList = ({user, verifiedAccountLoading}) => {
   const { t, i18n } = useTranslation();  // Initialize translation hook

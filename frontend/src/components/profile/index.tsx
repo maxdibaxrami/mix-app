@@ -7,7 +7,6 @@ import {
   PerimumIcon,
   SettingIcon,
   PenIcon,
-  EnergyIcon,
   FirendsIcon,
   FlashIcon,
 } from "@/Icons/index";
