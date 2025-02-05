@@ -4,36 +4,40 @@ import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
 import { useState } from "react";
 
 export const EnergyCard = ({ color, title, description, price, type }) => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false); // State for handling button disable during transaction
 
   const handlePaymentTon = async () => {
-    setIsProcessing(true); // Start processing
+    setIsProcessing(true); // Disable button during transaction process
     try {
-      // Step 1: Connect the wallet
+      console.log("Starting payment process...");
+
+      // Step 1: Connect the wallet if not connected
       const isWalletConnected = await connectTONWallet();
+      console.log("Wallet connected:", isWalletConnected);
 
       if (!isWalletConnected) {
         alert("Please connect your TON wallet to proceed.");
         return;
       }
 
-      // Step 2: Proceed with the transaction logic
-      console.log("Proceeding to payment...");
-
-      // Step 3: Send the transaction
+      // Step 2: Send the transaction
+      console.log("Sending transaction...");
       const transactionSuccess = await sendTransaction({ amount: price });
 
-      // If the transaction is successful
+      // Step 3: Check transaction result and alert the user
       if (transactionSuccess) {
+        console.log("Transaction successful.");
         alert("Transaction successful!");
       } else {
+        console.log("Transaction failed.");
         alert("Transaction failed.");
       }
     } catch (error) {
-      // Handle errors during wallet connection or transaction
-      alert("Transaction failed: " + error.message);
+      // Handle any errors during the connection or transaction
+      console.error("Error during transaction:", error);
+      alert("Transaction failed: " + (error.message || "Unknown error"));
     } finally {
-      setIsProcessing(false); // Stop processing
+      setIsProcessing(false); // Enable the button again after process
     }
   };
 
@@ -54,12 +58,12 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
           </div>
         </div>
         <Button
-          disabled={isProcessing} // Disable button while processing
+          disabled={isProcessing} // Disable button during processing
           color={type === "star" ? "secondary" : "default"}
           radius="full"
           size="sm"
           variant={"solid"}
-          onClick={type === "ton" ? handlePaymentTon : undefined} // Trigger wallet connection and payment on click
+          onClick={type === "ton" ? handlePaymentTon : undefined} // Trigger TON payment
         >
           {type === "star" ? (
             <PerimumIcon stroke="#FFF" fill="#FFF" className="size-5" />
