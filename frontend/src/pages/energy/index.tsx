@@ -10,6 +10,7 @@ import { useState } from "react";
 import { EnergyCard } from "./energyCards";
 import { FirendsIcon, PerimumIcon, TonCoinIcon } from "@/Icons";
 import { shareURL } from "@telegram-apps/sdk-react";
+import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 
 
 
@@ -19,6 +20,7 @@ export default function EnergyViewPage() {
   const lp = useLaunchParams();
   const [selected, setSelected] = useState<React.Key >("stars");
   const { data: referral } = useSelector((state: RootState) => state.referral);
+  const wallet = useTonWallet();
 
   if(loading){
     return <div className="h-screen w-screen flex flex-col p-6 items-center justify-center"> 
@@ -142,7 +144,10 @@ export default function EnergyViewPage() {
                                             </div>
                                         }
                                     >
-                                        <EnergyCard 
+
+                                        {wallet?
+                                            <>
+                                            <EnergyCard 
                                                 type="ton" 
                                                 title={t("50_Energy")} 
                                                 color={"default"} 
@@ -170,6 +175,10 @@ export default function EnergyViewPage() {
                                                 description={"Save 38%"} 
                                                 price={2} 
                                             />
+                                            </>
+                                          :   
+                                          <TonConnectButton className="ton-connect-page__button"/>
+                                        }
                                     </Tab>
                                 </Tabs>
                             </CardBody>

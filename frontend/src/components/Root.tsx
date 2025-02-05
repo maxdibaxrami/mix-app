@@ -30,9 +30,9 @@ export function Root() {
      <ViewportHeightProvider>
               <NextUIProvider>
                 <TonConnectUIProvider manifestUrl={publicUrl('tonconnect-manifest.json')}>
-                  <NextThemesProvider attribute="class" defaultTheme="dark">
-                    <App /> {/* I18nextProvider is now moved to the App component */}
-                  </NextThemesProvider>
+                    <NextThemesProvider attribute="class" defaultTheme="dark">
+                      <App /> {/* I18nextProvider is now moved to the App component */}
+                    </NextThemesProvider>
                 </TonConnectUIProvider>
               </NextUIProvider>
       </ViewportHeightProvider>

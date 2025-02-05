@@ -43,7 +43,7 @@ export const sendTransaction = async ({ amount, type }) => {
         {
           address: TON_WALLET, // Owner's wallet address
           amount: (amount * Math.pow(10, 9)).toString(), // Amount in nanoTON
-          payload: type === "star" ? "Star Package" : "Regular Package", // Optional message or payload
+          payload: "amount : ", // Optional message or payload
         },
       ],
     };
