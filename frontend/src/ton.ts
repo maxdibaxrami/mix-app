@@ -22,6 +22,7 @@ export const connectTONWallet = async () => {
     return true;
   } catch (error) {
     console.error("Failed to connect TON wallet:", error);
+    alert("Failed to connect to TON wallet: " + error.message);
     return false;
   }
 };
@@ -43,13 +44,12 @@ export const sendTransaction = async ({ amount }) => {
         {
           address: TON_WALLET, // Owner's wallet address
           amount: (amount * Math.pow(10, 9)).toString(), // Amount in nanoTON
-          payload: "amount : ", // Optional message or payload
+          payload: `Payment of ${amount} TON`, // Optional message or payload
         },
       ],
     };
 
     // Send the transaction using the connector
-    // @ts-ignore
     await connector.sendTransaction(transaction);
     console.log("Transaction sent successfully.");
 

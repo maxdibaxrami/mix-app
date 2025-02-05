@@ -3,7 +3,6 @@ import { connectTONWallet, sendTransaction } from "@/ton";
 import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
 
 export const EnergyCard = ({ color, title, description, price, type }) => {
-
   const handlePaymentTon = async () => {
     try {
       // Step 1: Connect the wallet
@@ -18,10 +17,14 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
       console.log("Proceeding to payment...");
 
       // Send the transaction
-      await sendTransaction({ amount: price });
+      const isTransactionSuccessful = await sendTransaction({ amount: price });
 
       // If the transaction is successful
-      alert("Transaction successful!");
+      if (isTransactionSuccessful) {
+        alert("Transaction successful!");
+      } else {
+        alert("Transaction failed. Please try again.");
+      }
     } catch (error) {
       // Handle errors during wallet connection or transaction
       alert("Transaction failed: " + error.message);
@@ -29,7 +32,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
   };
 
   return (
-    <Card className="py-2 mb-2  bg-background/70">
+    <Card className="py-2 mb-2 bg-background/70">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar
