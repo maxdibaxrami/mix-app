@@ -71,7 +71,7 @@ export default function EnergyViewPage() {
                             radius="lg"
                             variant="shadow"
                             color="primary"
-                            onClick={AddFirendsDialog}
+                            onPress={AddFirendsDialog}
 
                             >
                             <div className="flex my-4 items-center">
