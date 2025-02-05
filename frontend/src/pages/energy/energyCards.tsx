@@ -1,34 +1,33 @@
-import { TON_WALLER } from "@/constant";
 import { FlashIcon, PerimumIcon, TonCoinIcon } from "@/Icons";
+import { connectTONWallet, sendTransaction } from "@/ton";
 import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
-import { useTonConnectUI } from '@tonconnect/ui-react';
 
 export const EnergyCard = ({ color, title, description, price, type }) => {
-  const [tonConnectUI] = useTonConnectUI(); // Initialize TonConnect
 
-  const handleTonPayment = async () => {
+  const handlePayment = async () => {
+    // Step 1: Connect the wallet
+    const isWalletConnected = await connectTONWallet();
+    
+    if (!isWalletConnected) {
+      alert("Please connect your TON wallet to proceed.");
+      return;
+    }
+
+    // Step 2: Payment logic (this will come in the next step)
+    console.log("Proceeding to payment...");
+
+    // Implement the payment transaction in the next step
+
     try {
-      const tx = {
-        validUntil: Date.now() + 1000000,
-        messages: [
-          {
-            address: TON_WALLER, // Add the receiver's TON address
-            amount: (price * 1e9).toString(), // Convert price to nanoton (1 TON = 1e9 nanoton)
-            payload: '', // Optional payload for the transaction
-          },
-        ],
-      };
-      const result = await tonConnectUI.sendTransaction(tx);
-      console.log('Transaction successful:', result);
-
-      // Handle success logic (e.g., update user data, give energy)
+      await sendTransaction({ amount: price, type });
+      alert("Transaction successful!");
     } catch (error) {
-      console.error('Transaction failed:', error);
+      alert("Transaction failed: " + error.message);
     }
   };
 
   return (
-    <Card className="py-2 mb-2">
+    <Card className="max-w-[340px] py-2 mb-2">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar
@@ -48,7 +47,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
           radius="full"
           size="sm"
           variant={"solid"}
-          onClick={type === "ton" ? handleTonPayment : null} // Add TON payment handler
+          onClick={handlePayment} // Trigger wallet connection and payment on click
         >
           {type === "star" ? (
             <PerimumIcon stroke="#FFF" fill="#FFF" className="size-5" />

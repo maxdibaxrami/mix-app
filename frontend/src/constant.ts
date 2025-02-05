@@ -6,7 +6,7 @@ import {
 
 export const BASEURL = "https://copychic.ru/"
 
-export const TON_WALLER = 'UQBLN3autdCTC8OJJM3yBEqnCaH0nTHRiskTziPWuYD1x_Ww'
+export const TON_WALLET = 'UQBLN3autdCTC8OJJM3yBEqnCaH0nTHRiskTziPWuYD1x_Ww'
     
 export const getlookingfor = (t) => [
     {
