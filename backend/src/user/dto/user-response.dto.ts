@@ -1,3 +1,5 @@
+import { User } from "@telegram-apps/init-data-node";
+
 export class UserResponseDto {
   id: number;
   telegramId: string;

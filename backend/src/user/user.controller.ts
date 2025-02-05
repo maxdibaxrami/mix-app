@@ -353,8 +353,7 @@ export class UserController {
       lat: user.lat,
       lon: user.lon,
       referralCode: user.referralCode,
-      rewardPoints: user.rewardPoints
-
+      rewardPoints: user.rewardPoints,
 
     };
   }
