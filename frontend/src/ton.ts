@@ -6,7 +6,7 @@ import { TON_WALLET } from "./constant";
 
 // Initialize the TonConnect instance
 const tonConnect = new TonConnect({
-  manifestUrl: "/tonconnect-manifest.json",  // Point to your hosted manifest.json
+  manifestUrl: "https://copychic.ru/tonconnect-manifest.json",  // Point to your hosted manifest.json
 });
 export const connectTONWallet = async () => {
   try {
