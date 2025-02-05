@@ -9,6 +9,7 @@ import { FirendsIcon, FlashIcon} from "@/Icons";
 import { shareURL } from "@telegram-apps/sdk-react";
 import { SparklesFlashIconText } from "@/components/animate/flash-sparkles";
 import { EnergyCard } from "./energyCards";
+import { TonConnectButton } from "@tonconnect/ui-react";
 
 
 
@@ -78,12 +79,14 @@ export default function EnergyViewPage() {
                           </CardHeader>
                           <CardBody>
 
+                            <TonConnectButton style={{width:"100%"}} className="ton-connect-page__button-connected flex items-center justify-center"/>
+
+                            <Divider className="my-2"/>
 
                               <EnergyCard color={"secondary"} title={t("250_Energy")} description={undefined} price={1} type={"ton"}/>
                               <EnergyCard color={"secondary"} title={t("500_Energy")} description={undefined} price={2} type={"ton"}/>
                               <EnergyCard color={"secondary"} title={t("1000_Energy")} description={undefined} price={4} type={"ton"}/>
 
-                              <Divider className="my-2"/>
 
 
                             <Button
