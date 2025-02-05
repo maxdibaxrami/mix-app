@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FlashIcon, PerimumIcon, TonCoinIcon } from "@/Icons";
 import { connectTONWallet, sendTransaction } from "@/ton";
 import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
