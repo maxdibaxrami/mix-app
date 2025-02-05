@@ -144,9 +144,7 @@ export function App() {
                   key={route.path}
                   path={route.path}
                   element={
-                    <MobileApp>
                       <route.Component />
-                    </MobileApp>
                   }
                 />
               ))}

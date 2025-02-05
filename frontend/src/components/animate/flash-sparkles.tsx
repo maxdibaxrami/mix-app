@@ -30,12 +30,12 @@ const SparklesFlashIconText: React.FC<SparklesCustomIconTextProps> = ({
 
   const generateIcon = (): Sparkle => {
     const angle = Math.random() * Math.PI * 2; // Random angle in radians
-    const distance = Math.random() * 100; // Random distance from center
+    const distance = Math.random() * 200; // Random distance from center
     const x = Math.cos(angle) * distance;
     const y = Math.sin(angle) * distance;
     const color = Math.random() > 0.5 ? colors.first : colors.second;
     const delay = Math.random() * 2;
-    const scale = Math.random() * 2 + 0.5; // Larger scale
+    const scale = Math.random() * 2 + 0.85; // Larger scale
     const lifespan = Math.random() * 10 + 5;
     const id = `${x}-${y}-${Date.now()}`;
     return { id, x, y, color, delay, scale, lifespan };

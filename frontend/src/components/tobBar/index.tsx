@@ -21,8 +21,9 @@ import {
   ViewIcon,
   FavoriteColor,
   GiftIcon,
-  EnergyIcon
+  FlashIcon
 } from '@/Icons/index'
+
 import { useTranslation } from 'react-i18next';
 import BlurFade from "../animate/BlurFade";
 import { useSelector } from "react-redux";
@@ -178,7 +179,7 @@ const TopBar = () => {
 
             {location.pathname === "/energy" &&
               <BlurFade className="flex items-center">
-                 <EnergyIcon className="size-6 text-primary"/>
+                 <FlashIcon className="size-6 text-primary"/>
                   <p className="font-bold px-1 mx-1 text-inherit text-center font-bold tracking-tighter md:leading-[4rem] w-fit flex items-center jusitfy-center mx-auto gap-1.5">
                     {t('energy')}
                   </p>

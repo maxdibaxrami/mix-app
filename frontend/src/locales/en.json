@@ -343,13 +343,14 @@
     "ton":"Ton",
     "buy":"Buy",
     "50_Energy":"50 Energy",
-    "150_Energy":"150 Energy",
+    "250_Energy":"250 Energy",
     "500_Energy":"500 Energy",
     "1000_Energy":"1000 Energy",
     "data_not_found":"No data available for display.",
     "min_max_2_18":"Minimum enter 2 characters and maximum 18",
     "min_max_2_100":"Minimum enter 2 characters and maximum 100",
     "access_to_location":"Access to location",
-    "location_access_prompt":"Please make sure to grant location access at least once for the app functionality to work properly."
+    "location_access_prompt":"Please make sure to grant location access at least once for the app functionality to work properly.",
+    "description_for_energy": "In our app, Energy allows users to engage with others in meaningful ways. Users can use their Energy to send messages to anyone in the app or give gifts to friends, enhancing their interactions. Additionally, when users refer new friends to the app, both the referrer and the referred user will receive bonus Energy as a reward, making it easier to connect and share with others. This system encourages users to stay active, invite friends, and enjoy even more rewarding experiences."
   }
   

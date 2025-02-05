@@ -38,34 +38,6 @@ const DataList = ({user, verifiedAccountLoading}) => {
           </ListboxItem>     
         }
         
-      <ListboxItem
-          key="premium_account"
-          showDivider
-          isDisabled={true}
-          description={t("Tounlockallfeatures,youneedapremiumaccount.")}
-          className="px-0"
-          startContent={
-            <IconWrapper className="bg-default/40 text-primary/70">
-              <SparklesStarText
-                    colors={{ first: "#fffe00", second: "#f5a525" }}
-                    sparklesCount={5} // Initial number of hearts
-                    text={  
-                        <PerimumIcon className="size-5"/>
-                    }
-                  />  
-            </IconWrapper>
-          }
-
-          endContent={
-            <ArrowRight style={{transform:`${i18n.language==="ar" || i18n.language === 'fa'?"rotate(180deg)":"rotate(0deg)"}`}}/>
-          }
-        >
-          {t('premium_account')}
-        </ListboxItem>
-
-
-
-
         <ListboxItem
           key="edit_profile"
           showDivider

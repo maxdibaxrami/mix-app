@@ -29,7 +29,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
   };
 
   return (
-    <Card className="max-w-[340px] py-2 mb-2">
+    <Card className="py-2 mb-2  bg-background/70">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar
@@ -45,7 +45,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
           </div>
         </div>
         <Button
-          color={type === "star" ? "secondary" : "primary"}
+          color={type === "star" ? "secondary" : "default"}
           radius="full"
           size="sm"
           variant={"solid"}
