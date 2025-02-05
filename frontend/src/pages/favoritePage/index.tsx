@@ -73,8 +73,8 @@ export default function FavoriteViewPage() {
             paddingRight:"18px"
           }}
         >
-
-          {data && favoriteUsers.map((value, index) => (<ProfileViewCard key={index} data={value} />))}
+          یسشیشسیشس
+          {data && favoriteUsers.map((value, index) => ( <ProfileViewCard key={index} data={value} /> ))}
 
         </motion.div >
         </section>
