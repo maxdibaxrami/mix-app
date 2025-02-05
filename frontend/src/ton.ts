@@ -22,7 +22,6 @@ export const connectTONWallet = async () => {
     return true;
   } catch (error) {
     console.error("Failed to connect TON wallet:", error);
-    alert("Failed to connect to TON wallet: " + error.message);
     return false;
   }
 };

@@ -1,9 +1,13 @@
 import { FlashIcon, PerimumIcon, TonCoinIcon } from "@/Icons";
 import { connectTONWallet, sendTransaction } from "@/ton";
 import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
+import { useState } from "react";
 
 export const EnergyCard = ({ color, title, description, price, type }) => {
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const handlePaymentTon = async () => {
+    setIsProcessing(true); // Start processing
     try {
       // Step 1: Connect the wallet
       const isWalletConnected = await connectTONWallet();
@@ -16,18 +20,20 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
       // Step 2: Proceed with the transaction logic
       console.log("Proceeding to payment...");
 
-      // Send the transaction
-      const isTransactionSuccessful = await sendTransaction({ amount: price });
+      // Step 3: Send the transaction
+      const transactionSuccess = await sendTransaction({ amount: price });
 
       // If the transaction is successful
-      if (isTransactionSuccessful) {
+      if (transactionSuccess) {
         alert("Transaction successful!");
       } else {
-        alert("Transaction failed. Please try again.");
+        alert("Transaction failed.");
       }
     } catch (error) {
       // Handle errors during wallet connection or transaction
       alert("Transaction failed: " + error.message);
+    } finally {
+      setIsProcessing(false); // Stop processing
     }
   };
 
@@ -48,6 +54,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
           </div>
         </div>
         <Button
+          disabled={isProcessing} // Disable button while processing
           color={type === "star" ? "secondary" : "default"}
           radius="full"
           size="sm"
