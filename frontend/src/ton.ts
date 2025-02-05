@@ -26,7 +26,7 @@ export const connectTONWallet = async () => {
   }
 };
 
-export const sendTransaction = async ({ amount, type }) => {
+export const sendTransaction = async ({ amount }) => {
   try {
     // Ensure the wallet is connected
     if (!connector.connected) {

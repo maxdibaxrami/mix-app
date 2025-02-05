@@ -18,7 +18,7 @@ export const EnergyCard = ({ color, title, description, price, type }) => {
       console.log("Proceeding to payment...");
 
       // Send the transaction
-      await sendTransaction({ amount: price, type });
+      await sendTransaction({ amount: price });
 
       // If the transaction is successful
       alert("Transaction successful!");
