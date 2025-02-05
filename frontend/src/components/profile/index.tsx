@@ -124,8 +124,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="grid gap-3 py-3 grid-cols-3 sm:grid-cols-3">
-              <div className="aspect-square">
+      <div className="grid gap-2 py-2 grid-cols-2 sm:grid-cols-2">
                 <Button
                   className="bg-gradient-to-tr w-full h-full from-primary/50 to-secondary/50 text-white "
                   radius="lg"
@@ -134,49 +133,50 @@ const ProfilePage = () => {
                   as={Link}
                   to="/energy"
                 >
-                  <div className="flex flex-col my-4 justify-center items-center">
+                  <div className="flex my-2 gap-2 justify-start items-center w-full">
                     <IconWrapper className="bg-background/80 text-secondary/80">
                       <EnergyIcon className="size-8"/>
                     </IconWrapper>
                     <p className="font-bold capitalize">{t("add_energy")}</p>
                   </div>
                 </Button>
-              </div>
-              <div className="aspect-square">
+
                 <Button
-                  className="bg-gradient-to-tr w-full h-full aspect-square from-primary/50 to-secondary/50 text-white"
+                  className="bg-gradient-to-tr w-full h-full from-primary/50 to-secondary/50 text-white"
                   radius="lg"
                   variant="shadow"
                   color="warning"
+                  as={Link}
+                  to="/energy"
                 >
-                  <div className="flex flex-col my-4 justify-center items-center">
+                  <div className="flex my-2 gap-2 justify-start items-center w-full">
                     <IconWrapper className="bg-background/80 text-secondary/80">
-                      <div className="flex flex-col aspect-square items-center justify-center">
                         <FlashIcon className="size-8"/>
-                        <small></small>
-                        </div>
                     </IconWrapper>
                     <p className="font-bold capitalize">{t("energy")} : {user.rewardPoints}</p>
                   </div>
                 </Button>
-              </div>
-              <div>
-                <Button
-                  className="bg-gradient-to-tr w-full h-full aspect-square from-primary/50 to-secondary/50 text-white"
-                  radius="lg"
-                  variant="shadow"
-                  color="primary"
-                  onPress={AddFirendsDialog}
-                >
-                  <div className="flex flex-col my-4 justify-center items-center">
-                    <IconWrapper className="bg-background/80 text-secondary/80">
-                      <FirendsIcon fill="currentColor" className="size-8"/>
-                    </IconWrapper>
-                    <p className="font-bold capitalize">{t("invite_your_friend")}</p>
-                  </div>
-                </Button>
-              </div>
       </div>
+                   <div className="mb-2">
+                        <Button
+                            className="bg-gradient-to-tr w-full h-full from-primary/50 to-secondary/50 text-white"
+                            radius="lg"
+                            variant="shadow"
+                            color="primary"
+                            onClick={AddFirendsDialog}
+                            >
+                            <div className="flex my-2 items-center">
+                                <IconWrapper className="bg-background/80 text-secondary/80">
+                                    <FirendsIcon fill="currentColor" className="size-8"/>
+                                </IconWrapper>
+                                <div className="px-2 flex flex-col">
+                                    <p className="font-bold capitalize text-start">{t("invite_your_friend")}</p>
+                                    <small className="text-wrap text-start">{t("Inviteyourfriendsandgetapremiumaccount")}</small>
+                                </div>
+
+                            </div>
+                        </Button>
+                    </div>      
       <DataList user={user} verifiedAccountLoading={verifiedAccountLoading}/>
     </div>
   );
@@ -184,7 +184,7 @@ const ProfilePage = () => {
 
 
 export const IconWrapper = ({children, className}) => (
-  <div style={{borderRadius:"50%"}} className={cn(className, "flex items-center mb-1 rounded-small justify-center p-2")}>
+  <div style={{borderRadius:"50%"}} className={cn(className, "flex items-center  rounded-small justify-center p-2")}>
     {children}
   </div>
 );

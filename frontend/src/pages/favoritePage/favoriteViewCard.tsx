@@ -1,6 +1,6 @@
-import { Button, Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
 import { BASEURL } from "@/constant";
-import { PerimumIcon, ProfileIcon, VerifyIconFill } from "@/Icons";
+import { PerimumIcon, VerifyIconFill } from "@/Icons";
 import { Link } from "react-router-dom";
 
 const ProfileViewCard = ({ data }) => {
@@ -37,18 +37,6 @@ const ProfileViewCard = ({ data }) => {
                    {data.verifiedAccount && <VerifyIconFill fill="#21b6a8" className="ml-2 size-6"/> }
                    {data.premium && <PerimumIcon />}
                   </p>
-                  
-                  <Button
-                    className="text-tiny text-white bg-primary/80"
-                    color="primary"
-                    radius="full"
-                    isIconOnly
-                    size="sm"
-                    variant="flat"
-                    
-                  >
-                    <ProfileIcon className="size-5"/>
-                  </Button>
                 </div>
               </div>
 

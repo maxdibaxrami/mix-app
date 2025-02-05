@@ -1,27 +1,13 @@
-import { Listbox, ListboxItem, CircularProgress, Chip, cn, Spinner } from "@nextui-org/react";
-import { ProfileIcon, LikeIcon, ViewIcon, PerimumIcon, FirendsIcon, ArrowRight, GiftIcon, FavoriteColor, VerifyIconFill } from "@/Icons/index";
+import { Listbox, ListboxItem, Chip, cn, Spinner } from "@nextui-org/react";
+import { ProfileIcon, LikeIcon, ViewIcon, PerimumIcon, ArrowRight, GiftIcon, FavoriteColor, VerifyIconFill } from "@/Icons/index";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { SparklesStarText } from "../animate/star-sparkles";
-import { SparklesCustomIconText } from "../animate/user-sparkles";
 
 const DataList = ({user, verifiedAccountLoading}) => {
   const { t, i18n } = useTranslation();  // Initialize translation hook
-  const [persent, setPersent] = useState(0)
-  const CompiliteProfilePersent = () => {
-    let validDataCount = 0;
-    for (let key in user) {
-        if (user[key] !== null && user[key] !== false && user[key] !== "") {
-            validDataCount++;
-        }
-    }
-    setPersent(validDataCount)
-  }
   const { data } = useSelector((state: RootState) => state.like);  // Assuming the like slice is in state.like
-
-  useEffect(CompiliteProfilePersent ,[])
 
   return (
     <div className="w-full text-default-700 bg-neutral/10 border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
@@ -52,32 +38,6 @@ const DataList = ({user, verifiedAccountLoading}) => {
           </ListboxItem>     
         }
         
-
-        <ListboxItem
-          
-          key="invite_your_friend"
-          href={"/#/add-firends"}
-          showDivider
-          description={t("Inviteyourfriendsandgetapremiumaccount")}
-          className="px-0"
-          startContent={
-            <IconWrapper className="bg-default/40 text-primary/70">
-                  <SparklesCustomIconText
-                    colors={{ first: "#21b6a8", second: "#ff4b61" }}
-                    sparklesCount={5} // Initial number of hearts
-                    text={  
-                        <FirendsIcon className="size-5"/>
-                    }
-                  />  
-            </IconWrapper>
-          }
-          endContent={
-            <ArrowRight style={{transform:`${i18n.language==="ar" || i18n.language === 'fa'?"rotate(180deg)":"rotate(0deg)"}`}}/>
-          }
-        >
-          {t('invite_your_friend')}
-        </ListboxItem>
-
       <ListboxItem
           key="premium_account"
           showDivider
@@ -113,13 +73,7 @@ const DataList = ({user, verifiedAccountLoading}) => {
           description={t('edit_profile')}
           className="px-0"
           endContent={
-            <CircularProgress
-              aria-label={t('loading')}
-              color="success"
-              showValueLabel={true}
-              size="md"
-              value={persent}
-            />
+            <ArrowRight style={{transform:`${i18n.language==="ar" || i18n.language === 'fa'?"rotate(180deg)":"rotate(0deg)"}`}}/>
           }
           
           startContent={

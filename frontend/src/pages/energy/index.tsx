@@ -9,7 +9,7 @@ import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { useState } from "react";
 import { EnergyCard } from "./energyCards";
 import { FirendsIcon, PerimumIcon, TonCoinIcon } from "@/Icons";
-import { Link } from "react-router-dom";
+import { shareURL } from "@telegram-apps/sdk-react";
 
 
 
@@ -18,6 +18,7 @@ export default function EnergyViewPage() {
   const { loading } = useSelector((state: RootState) => state.user);  // Assuming the like slice is in state.like
   const lp = useLaunchParams();
   const [selected, setSelected] = useState<React.Key >("stars");
+  const { data: referral } = useSelector((state: RootState) => state.referral);
 
   if(loading){
     return <div className="h-screen w-screen flex flex-col p-6 items-center justify-center"> 
@@ -25,6 +26,14 @@ export default function EnergyViewPage() {
     </div>
   }
 
+  const AddFirendsDialog = () => {
+    if (shareURL && referral) {
+      // Only share when referral is available
+      shareURL(referral, t("share_link"));
+    } else {
+      console.error('shareURL is not available or referral data is missing');
+    }
+  };
 
   const getPaddingForPlatform = () => {
     if (['ios'].includes(lp.platform)) {
@@ -60,8 +69,8 @@ export default function EnergyViewPage() {
                             radius="lg"
                             variant="shadow"
                             color="primary"
-                            as={Link}
-                            to={'/add-firends'}
+                            onClick={AddFirendsDialog}
+
                             >
                             <div className="flex my-4 items-center">
                                 <IconWrapper className="bg-background/80 text-secondary/80">
@@ -77,92 +86,92 @@ export default function EnergyViewPage() {
                     </div>
                         <Card className="max-w-full h-full">
                             <CardBody className="overflow-hidden">
-                            <Tabs
-                                fullWidth
-                                aria-label="Tabs form"
-                                // @ts-ignore
-                                selectedKey={selected}
-                                size="md"
-                                onSelectionChange={setSelected}
-                            >
-                                <Tab 
-                                    key="stars" 
-                                    title={
-                                        <div className="flex items-center justify-center gap-1">
-                                            <PerimumIcon className="size-5"/>
-                                            <p className="font-medium">{t("stars")}</p>
-                                        </div>
-                                    }
+                                <Tabs
+                                    fullWidth
+                                    aria-label="Tabs form"
+                                    // @ts-ignore
+                                    selectedKey={selected}
+                                    size="md"
+                                    onSelectionChange={setSelected}
                                 >
-                                    <EnergyCard 
-                                        type="star" 
-                                        title={t("50_Energy")} 
-                                        color={"default"} 
-                                        description={"Save 20%"} 
-                                        price={80}
-                                    />
-                                    <EnergyCard 
-                                        type="star" 
-                                        title={t("150_Energy")} 
-                                        color={"primary"} 
-                                        description={"Save 30%"} 
-                                        price={190}
-                                    />
-                                    <EnergyCard 
-                                        type="star" 
-                                        title={t("500_Energy")} 
-                                        color={"secondary"} 
-                                        description={"Save 40%"} 
-                                        price={799}
-                                    />
-                                    <EnergyCard 
-                                        type="star" 
-                                        title={t("1000_Energy")} 
-                                        color={"danger"} 
-                                        description={"Save 50%"} 
-                                        price={1299}
-                                    />
-
-                                </Tab>
-                                <Tab 
-                                    key="ton" 
-                                    title={
-                                        <div className="flex items-center justify-center gap-1">
-                                            <TonCoinIcon className="size-5"/>
-                                            <p className="font-medium">{t("ton")}</p>
-                                        </div>
-                                    }
-                                >
-                                    <EnergyCard 
-                                            type="ton" 
+                                    <Tab 
+                                        key="stars" 
+                                        title={
+                                            <div className="flex items-center justify-center gap-1">
+                                                <PerimumIcon className="size-5"/>
+                                                <p className="font-medium">{t("stars")}</p>
+                                            </div>
+                                        }
+                                    >
+                                        <EnergyCard 
+                                            type="star" 
                                             title={t("50_Energy")} 
                                             color={"default"} 
-                                            description={"Save 0%"} 
-                                            price={0.3} 
+                                            description={"Save 20%"} 
+                                            price={80}
                                         />
                                         <EnergyCard 
-                                            type="ton" 
+                                            type="star" 
                                             title={t("150_Energy")} 
                                             color={"primary"} 
-                                            description={"Save 5%"} 
-                                            price={0.6} 
+                                            description={"Save 30%"} 
+                                            price={190}
                                         />
                                         <EnergyCard 
-                                            type="ton" 
+                                            type="star" 
                                             title={t("500_Energy")} 
                                             color={"secondary"} 
-                                            description={"Save 21%"} 
-                                            price={1.3} 
+                                            description={"Save 40%"} 
+                                            price={799}
                                         />
                                         <EnergyCard 
-                                            type="ton" 
+                                            type="star" 
                                             title={t("1000_Energy")} 
                                             color={"danger"} 
-                                            description={"Save 38%"} 
-                                            price={2} 
+                                            description={"Save 50%"} 
+                                            price={1299}
                                         />
-                                </Tab>
-                            </Tabs>
+
+                                    </Tab>
+                                    <Tab 
+                                        key="ton" 
+                                        title={
+                                            <div className="flex items-center justify-center gap-1">
+                                                <TonCoinIcon className="size-5"/>
+                                                <p className="font-medium">{t("ton")}</p>
+                                            </div>
+                                        }
+                                    >
+                                        <EnergyCard 
+                                                type="ton" 
+                                                title={t("50_Energy")} 
+                                                color={"default"} 
+                                                description={"Save 0%"} 
+                                                price={0.3} 
+                                            />
+                                            <EnergyCard 
+                                                type="ton" 
+                                                title={t("150_Energy")} 
+                                                color={"primary"} 
+                                                description={"Save 5%"} 
+                                                price={0.6} 
+                                            />
+                                            <EnergyCard 
+                                                type="ton" 
+                                                title={t("500_Energy")} 
+                                                color={"secondary"} 
+                                                description={"Save 21%"} 
+                                                price={1.3} 
+                                            />
+                                            <EnergyCard 
+                                                type="ton" 
+                                                title={t("1000_Energy")} 
+                                                color={"danger"} 
+                                                description={"Save 38%"} 
+                                                price={2} 
+                                            />
+                                    </Tab>
+                                </Tabs>
                             </CardBody>
                         </Card>
                     </div>
