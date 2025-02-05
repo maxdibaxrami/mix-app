@@ -66,7 +66,7 @@ export default function GiftViewPage() {
               >
       
         <motion.div 
-          className="grid gap-2 grid-cols-2 py-2 "
+          className="grid gap-2 grid-cols-2 py-2 w-full"
           style={{
             paddingBottom: "6rem",
             paddingLeft:"18px",

@@ -53,7 +53,7 @@ export default function FavoriteViewPage() {
   return (
     <Page>
        <div
-          className="container mx-auto h-screen max-w-7xl flex-grow"
+          className="container mx-auto h-screen flex-grow"
           style={{
             marginBottom:"5rem",
             
@@ -66,14 +66,13 @@ export default function FavoriteViewPage() {
               >
       
         <motion.div 
-          className="grid gap-2 grid-cols-2 py-2"
+          className="grid gap-2 grid-cols-2 py-2 w-full"
           style={{
             paddingBottom: "6rem",
             paddingLeft:"18px",
             paddingRight:"18px"
           }}
         >
-          یسشیشسیشس
           {data && favoriteUsers.map((value, index) => ( <ProfileViewCard key={index} data={value} /> ))}
 
         </motion.div >
