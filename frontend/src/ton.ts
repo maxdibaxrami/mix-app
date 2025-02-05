@@ -39,7 +39,7 @@ export const sendTransaction = async ({ amount }) => {
 
     // Transaction payload
     const transaction = {
-      valid_until: Math.floor(Date.now() / 1000) + 60, // Transaction valid for 60 seconds
+      validUntil: Math.floor(Date.now() / 1000) + 60, // Transaction valid for 60 seconds
       messages: [
         {
           address: TON_WALLET, // Owner's wallet address
