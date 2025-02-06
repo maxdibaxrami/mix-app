@@ -83,6 +83,7 @@ export default function EnergyViewPage() {
                           <div>Modal state: {state?.status}</div>
                           <button onClick={open}>Open modal</button>
                           <TonConnectButton />
+                          
                             <Divider className="my-2"/>
 
                               <EnergyCard color={"secondary"} title={t("250_Energy")} description={undefined} price={1} type={"ton"}/>
