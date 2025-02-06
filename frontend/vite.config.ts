@@ -19,12 +19,6 @@ export default defineConfig({
     //    checker({ typescript: false })
 
   ],
-  build: {
-    rollupOptions: {
-      external: ['web-animations-js'], // Add this line
-    },
-  },
-
   publicDir: './public',
   server: {
     // Exposes your dev server and makes it accessible for the devices in the same network.

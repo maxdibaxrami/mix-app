@@ -44,8 +44,7 @@
     "react-window": "^1.8.11",
     "react-window-infinite-loader": "^1.0.10",
     "socket.io-client": "^4.8.1",
-    "swiper": "^11.1.14",
-    "web-animations-js": "^2.3.2"
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
