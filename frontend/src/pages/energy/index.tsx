@@ -59,10 +59,10 @@ export default function EnergyViewPage() {
       >
               <section
                     className="flex flex-col items-center justify-center px-3"
-                    style={{paddingTop:`calc(4rem + ${getPaddingForPlatform()})`,}}  
+                    style={{paddingTop:`calc(4.5rem + ${getPaddingForPlatform()})`,}}  
                 >
                      <div className="flex flex-col w-full">
-                      <Card className="bg-neutral/10 pt-3">
+                      <Card className="bg-background/30 pt-3">
                           <CardHeader className="flex gap-3 flex-col w-full h-full">
                             <SparklesFlashIconText 
                               text={
@@ -75,22 +75,10 @@ export default function EnergyViewPage() {
                             />
                            
                             <div className="flex flex-col">
-                              <p className="text-2xl font-bold">{`${t('energy')} : ${user.rewardPoints}`}</p>
+                              <p className="text-2xl font-bold ">{`${t('energy')} : ${user.rewardPoints}`}</p>
                             </div>
                           </CardHeader>
                           <CardBody>
-
-                          <div>Modal state: {state?.status}</div>
-                          <button onClick={open}>Open modal</button>
-                          <TonConnectButton />
-                          
-                            <Divider className="my-2"/>
-
-                              <EnergyCard color={"secondary"} title={t("250_Energy")} description={undefined} price={1} type={"ton"}/>
-                              <EnergyCard color={"secondary"} title={t("500_Energy")} description={undefined} price={2} type={"ton"}/>
-                              <EnergyCard color={"secondary"} title={t("1000_Energy")} description={undefined} price={4} type={"ton"}/>
-
-
 
                             <Button
                                     className="bg-gradient-to-tr w-full mb-2 h-full from-primary/50 to-secondary/50 text-white"
@@ -105,7 +93,7 @@ export default function EnergyViewPage() {
                                       </IconWrapper>
                                       <div className="px-2 flex flex-col">
                                           <p className="font-bold capitalize text-start">{t("invite_your_friend")}</p>
-                                          <small className="text-wrap  text-start">{t("Inviteyourfriendsandgetapremiumaccount")}</small>
+                                          <small className="text-wrap p-0.5 pb-1 text-start">{t("Inviteyourfriendsandgetapremiumaccount")}</small>
                                       </div>
 
                                   </div>

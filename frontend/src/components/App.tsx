@@ -18,9 +18,10 @@ import { fetchLikes } from '@/features/likeSlice';
 import { fetchMatches } from '@/features/matchSlice';
 import { fetchFilteredExplore } from '@/features/exploreSlice';
 import { fetchConversations } from '@/features/conversationsSlice';
+import { Toaster } from 'react-hot-toast';
 import { fetchNearBySliceUsers, setFilters } from '@/features/nearBySlice';
 import { fetchReferralData } from '@/features/refralSlice';
-//import MobileApp from './wapper';
+import MobileApp from './wapper';
 
 const GetStoredLanguage = async () => {
   try {
@@ -144,7 +145,9 @@ export function App() {
                   key={route.path}
                   path={route.path}
                   element={
+                    <MobileApp>
                       <route.Component />
+                    </MobileApp>
                   }
                 />
               ))}
