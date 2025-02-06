@@ -9,7 +9,7 @@ import { FirendsIcon, FlashIcon} from "@/Icons";
 import { shareURL } from "@telegram-apps/sdk-react";
 import { SparklesFlashIconText } from "@/components/animate/flash-sparkles";
 import { EnergyCard } from "./energyCards";
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonConnectModal } from '@tonconnect/ui-react';
 
 
 
@@ -18,6 +18,7 @@ export default function EnergyViewPage() {
   const { data: user , loading } = useSelector((state: RootState) => state.user);  // Assuming the like slice is in state.like
   const lp = useLaunchParams();
   const { data: referral } = useSelector((state: RootState) => state.referral);
+  const { state, open } = useTonConnectModal();
 
   if(loading){
     return <div className="h-screen w-screen flex flex-col p-6 items-center justify-center"> 
@@ -79,8 +80,9 @@ export default function EnergyViewPage() {
                           </CardHeader>
                           <CardBody>
 
-                            <TonConnectButton style={{width:"100%"}} className="ton-connect-page__button-connected flex items-center justify-center"/>
-
+                          <div>Modal state: {state?.status}</div>
+                          <button onClick={open}>Open modal</button>
+                          <TonConnectButton />
                             <Divider className="my-2"/>
 
                               <EnergyCard color={"secondary"} title={t("250_Energy")} description={undefined} price={1} type={"ton"}/>
